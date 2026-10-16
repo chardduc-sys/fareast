@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "동방열국지",
+  "short_name": "동방열국지",
+  "description": "조선·후금·왜·말갈·명이 한반도와 만주, 중원, 서일본, 연해주를 두고 겨루는 턴제 영토 전략 게임",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#141F29",
+  "theme_color": "#141F29",
+  "categories": ["games", "strategy"],
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
