@@ -1116,22 +1116,22 @@ function showLoadDialog(fromStart){
 
 /* ---------- faction select ---------- */
 const FINFO={
- joseon:{hanja:'朝鮮',era:'1392년 건국 · 유교 관료제 왕조',bg:'이성계가 고려를 이어 세운 왕조. 한양을 도읍으로 과거제와 유교 통치를 다졌고, 편전(片箭)으로 이름난 궁술과 판옥선·거북선 수군으로 임진왜란을 견뎠다.',strong:'시작 지역(조선) 시세로 궁병이 쌈(×0.8), 수군 보통',weak:'기병이 비쌈(×1.4). 북으로 후금·말갈, 서로 명, 바다 건너 왜국 — 사방이 적',diff:'보통',start:'경기·황해·강원·전라',
+ joseon:{hanja:'朝鮮',era:'1392년 건국 · 유교 관료제 왕조',bg:'이성계가 고려를 이어 세운 왕조. 한양을 도읍으로 과거제와 유교 통치를 다졌고, 편전(片箭)으로 이름난 궁술과 판옥선·거북선 수군으로 임진왜란을 견뎠다.',strong:'궁병을 싸게 뽑고 수군도 무난함. 전라·경기의 넉넉한 세수',weak:'기병이 비쌈. 북으로 후금·말갈, 서로 명, 바다 건너 왜국 — 사방이 적',diff:'보통',start:'경기·황해·강원·전라',
    praise:['압록강 너머 요동 벌판에서 현해탄 너머 규슈까지, 반도의 왕조가 대륙과 바다를 한 품에 안았다.','세종의 활과 이순신의 배가 꿈꾸던 바다 너머의 평화를, 전하께서 손수 이루셨나이다.']},
- jin:{hanja:'後金',era:'1616년 누르하치 건국 · 1636년 청(淸)으로 개칭',bg:'건주여진의 누르하치가 여진 부족을 통합해 세운 나라. 팔기(八旗) 제도로 온 부족을 군대로 묶었고, 기마 궁술로 요동의 명군을 거듭 깨뜨렸다.',strong:'시작 지역(만주) 시세로 기병이 매우 쌈(×0.6), 궁병도 쌈(×0.8)',weak:'수군이 비싸고(×1.3) 바다에 약함. 남쪽에 명의 대군',diff:'쉬움',start:'요동·건주·길림',
+ jin:{hanja:'後金',era:'1616년 누르하치 건국 · 1636년 청(淸)으로 개칭',bg:'건주여진의 누르하치가 여진 부족을 통합해 세운 나라. 팔기(八旗) 제도로 온 부족을 군대로 묶었고, 기마 궁술로 요동의 명군을 거듭 깨뜨렸다.',strong:'기병을 아주 싸게, 궁병도 싸게 뽑음. 들판에서 강함',weak:'수군이 비싸고 바다에 약함. 남쪽에 명의 대군',diff:'쉬움',start:'요동·건주·길림',
    praise:['팔기의 말발굽이 연경의 성문을 지나 한양을 거쳐 바다 끝 규슈의 모래밭에 닿았다.','누르하치가 열세 벌의 갑옷으로 시작한 길이, 칸의 손에서 동방 전체의 길이 되었다.']},
- wa:{hanja:'倭國',era:'전국시대 말기 · 1592년 조선 침공',bg:'백 년 전란을 끝낸 일본의 무가 정권. 조총으로 무장한 아시가루 보병과 다이묘들의 수군을 앞세워 바다 건너 대륙을 넘봤다.',strong:'시작 지역(일본) 시세로 수군이 매우 쌈(×0.6), 보병 쌈(×0.9)',weak:'섬나라라 모든 정벌이 해로 원정 — 거리 패널티와 상륙전의 불리함을 안고 싸움',diff:'어려움',start:'치쿠젠·나가토·대마도',
+ wa:{hanja:'倭國',era:'전국시대 말기 · 1592년 조선 침공',bg:'백 년 전란을 끝낸 일본의 무가 정권. 조총으로 무장한 아시가루 보병과 다이묘들의 수군을 앞세워 바다 건너 대륙을 넘봤다.',strong:'수군을 아주 싸게, 보병도 싸게 뽑음. 바다의 주인',weak:'섬나라라 모든 정벌이 바다 건너 원정 — 먼 뱃길과 상륙전의 불리함을 안고 싸움',diff:'어려움',start:'치쿠젠·나가토·대마도',
    praise:['현해탄을 건넌 함대가 대륙의 끝, 흑룡강의 얼음벌판까지 깃발을 세웠다.','섬에서 시작해 바다를 길로 삼은 자만이 이룰 수 있는 패업이었다.']},
- mohe:{hanja:'靺鞨',era:'두만강·연해주의 여진계 부족 연맹',bg:'발해의 옛 땅에 흩어져 살던 사냥꾼과 어로민의 부족들. 말과 활에 능하고 혹한에 강했으며, 모피와 인삼 교역으로 중원과 조선을 오갔다.',strong:'시작 지역(연해주) 시세로 기병(×0.7)·궁병(×0.8)이 쌈',weak:'땅이 가난해 수입이 적음. 남쪽 후금·조선과 맞닿아 초반이 위태로움',diff:'어려움',start:'연해주·간도·목단강',
+ mohe:{hanja:'靺鞨',era:'두만강·연해주의 여진계 부족 연맹',bg:'발해의 옛 땅에 흩어져 살던 사냥꾼과 어로민의 부족들. 말과 활에 능하고 혹한에 강했으며, 모피와 인삼 교역으로 중원과 조선을 오갔다.',strong:'기병과 궁병을 싸게 뽑음. 혹한의 땅에 강함',weak:'땅이 가난해 수입이 적음. 남쪽 후금·조선과 맞닿아 초반이 위태로움',diff:'어려움',start:'연해주·간도·목단강',
    praise:['두만강 변 사냥꾼의 활이 황제의 도성과 왕의 궁궐 위에서 울었다.','가장 가난한 땅에서 일어나 가장 넓은 땅을 다스리니, 하늘도 이 부족의 이름을 다시 불렀다.']},
- ming:{hanja:'大明',era:'1368년 주원장 건국 · 북경 천도',bg:'몽골을 몰아내고 중원을 되찾은 한족 왕조. 만리장성과 요동 변경에 대군을 두었고, 임진왜란 때 조선에 원군을 보냈다.',strong:'시작 지역(중원) 시세로 보병이 쌈(×0.8). 시작 병력·수입·성이 가장 많음',weak:'기병이 매우 비쌈(×1.5). 넓은 땅의 민심 관리가 과제',diff:'쉬움(초반) · 보통(후반)',start:'연경·천진·보정·제남·등주',
+ ming:{hanja:'大明',era:'1368년 주원장 건국 · 북경 천도',bg:'몽골을 몰아내고 중원을 되찾은 한족 왕조. 만리장성과 요동 변경에 대군을 두었고, 임진왜란 때 조선에 원군을 보냈다.',strong:'보병을 싸게 뽑음. 시작 병력·수입·성이 가장 많음',weak:'기병이 아주 비쌈. 넓은 땅의 민심 관리가 과제',diff:'쉬움(초반) · 보통(후반)',start:'연경·천진·보정·제남·등주',
    praise:['중원의 천자가 요동과 반도, 그리고 동쪽 바다의 섬들까지 한 울타리 안에 두었다.','만리장성은 이제 국경이 아니라 옛 기념비가 되었다.']}};
 function showFactionSelect(cancelable){
   const root=document.getElementById('modalRoot'); document.querySelectorAll('.scene').forEach(e=>e.remove());
-  const cards=ALLF.map(f=>{ const i=FINFO[f]; return `<div class="fcard" style="--fc:${FCOL[f]}"><div class="nm"><b>${fname(f)}</b><span>${i.hanja}</span></div><div class="era">${i.era}</div><p>${i.bg}</p>
+  const cards=ALLF.map(f=>{ const i=FINFO[f]; return `<div class="fcard" style="--fc:${FCOL[f]}"><div class="nm"><b>${fname(f)}</b><span>${i.hanja}</span></div><p>${i.bg}</p>
     <div class="kv"><b>강점</b> ${i.strong}</div><div class="kv"><b>약점</b> ${i.weak}</div><div class="kv"><b>시작 영지</b> ${i.start} · <b>난이도</b> ${i.diff}</div>
     <button data-f="${f}">${fname(f)}(으)로 시작</button></div>`; }).join('');
-  root.innerHTML=`<div class="fsel"><div class="wrap"><h2>세력 선택</h2><div class="lead">모병비는 나라가 아니라 병력을 뽑는 <b>지역의 시세</b>를 따릅니다. 땅을 넓히면 그 지역의 싼 병종을 쓸 수 있습니다.</div><div class="fgrid">${cards}</div><div class="row" style="justify-content:center;gap:8px;margin-top:16px">${Object.keys(loadSlots()).length?'<button class="loadbtn" style="color:#fff;background:transparent;border-color:#c9a85a">저장된 게임 불러오기</button>':''}${cancelable?'<button class="cancel" style="margin:0">취소 — 지금 게임 계속</button>':''}</div></div></div>`;
+  root.innerHTML=`<div class="fsel"><div class="wrap"><h2>세력 선택</h2><div class="fgrid">${cards}</div><div class="row" style="justify-content:center;gap:8px;margin-top:16px">${Object.keys(loadSlots()).length?'<button class="loadbtn" style="color:#fff;background:transparent;border-color:#c9a85a">저장된 게임 불러오기</button>':''}${cancelable?'<button class="cancel" style="margin:0">취소 — 지금 게임 계속</button>':''}</div></div></div>`;
   root.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{ root.innerHTML=''; newGame(b.dataset.f); }));
   root.querySelector('.cancel')?.addEventListener('click',()=>{ root.innerHTML=''; });
   root.querySelector('.loadbtn')?.addEventListener('click',()=>showLoadDialog(!cancelable));
