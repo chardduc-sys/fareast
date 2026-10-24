@@ -249,6 +249,12 @@ th{background:color-mix(in srgb,var(--line) 40%,transparent)}
 .scene .column{animation:retreat 6s linear both}
 .scene .rain{stroke-dasharray:5 16;animation:rainfall .45s linear infinite}
 .scene .crow{animation:crowfly 6s linear both}
+.scene .legA,.scene .legB,.scene .legF,.scene .legF2,.scene .hlegA,.scene .hlegB{transform-box:fill-box;transform-origin:50% 0} .scene .legA,.scene .hlegA{animation:legSw .9s ease-in-out infinite alternate} .scene .legB,.scene .hlegB{animation:legSw .9s ease-in-out infinite alternate-reverse} .scene .legF{animation:legSw .5s ease-in-out infinite alternate} .scene .legF2{animation:legSw .5s ease-in-out infinite alternate-reverse} .scene .hbody{animation:hbob .45s ease-in-out infinite alternate} .scene .marchR{animation:marchR 5s linear both} .scene .clash{animation:clashF 1.3s ease-in-out infinite alternate} .scene .thrust{animation:thrust .55s ease-in-out infinite alternate} .scene .arrowR{animation:arrR 1.4s linear infinite} .scene .arrowL{animation:arrL 1.4s linear infinite}
+@keyframes legSw{from{transform:rotate(-16deg)}to{transform:rotate(16deg)}} @keyframes hbob{from{transform:translateY(0)}to{transform:translateY(-2px)}} @keyframes marchR{from{transform:translateX(-40px)}to{transform:translateX(70px)}} @keyframes clashF{from{transform:translateX(0)}to{transform:translateX(26px)}} @keyframes thrust{from{transform:translateX(-6px)}to{transform:translateX(8px)}} @keyframes arrR{from{transform:translate(0,0);opacity:0}15%{opacity:1}to{transform:translate(240px,40px);opacity:0}} @keyframes arrL{from{transform:translate(0,0);opacity:0}15%{opacity:1}to{transform:translate(-240px,40px);opacity:0}}
+.scene .sink{transform-box:fill-box;transform-origin:50% 100%;animation:sink 2s ease-in both} @keyframes sink{from{transform:translateY(0) rotate(0)}to{transform:translateY(46px) rotate(-9deg)}}
+.navwarn{position:fixed;left:50%;top:max(58px,calc(env(safe-area-inset-top,0px) + 50px));transform:translateX(-50%);z-index:2147483600;width:min(520px,92vw);background:rgba(28,22,16,.92);color:#f3e6c4;border:1px solid #c9a85a;border-radius:10px;padding:10px 34px 10px 14px;font-size:14px;line-height:1.55;box-shadow:0 6px 24px rgba(0,0,0,.5)} .navwarn.bad{border-color:#e05a3a;background:rgba(60,16,12,.94)} .navwarn .hot{color:#ffb39a;font-weight:700} .navwarn .x{position:absolute;right:6px;top:6px;background:transparent;border:0;color:#f3e6c4;font-size:18px;cursor:pointer}
+.scene .runner{transform-box:fill-box;transform-origin:50% 100%;animation:run .32s ease-in-out infinite alternate} .scene .flee{animation:fleeR 3.4s linear both} .scene .advance{transform-box:fill-box;transform-origin:50% 100%;animation:advance 3s ease-out both} .scene .clashL{animation:clashL 1.6s ease-in-out infinite alternate} .scene .clashR{animation:clashL 1.6s ease-in-out .3s infinite alternate} .scene .arrow{animation:arrowfly 1.2s linear infinite}
+@keyframes run{from{transform:translateY(0) rotate(6deg)}to{transform:translateY(-6px) rotate(10deg)}} @keyframes fleeR{from{transform:translateX(-80px)}to{transform:translateX(160px)}} @keyframes advance{from{transform:scale(.9) translateY(-14px)}to{transform:scale(1.04) translateY(4px)}} @keyframes clashL{from{transform:translateX(0)}to{transform:translateX(34px)}} @keyframes arrowfly{from{transform:translate(0,0);opacity:0}20%{opacity:1}to{transform:translate(90px,-30px);opacity:0}}
 .scene .banner{transform-box:fill-box;transform-origin:left center;animation:wave .9s ease-in-out infinite alternate}
 .scene .ray{transform-box:fill-box;transform-origin:center;animation:spin 40s linear infinite}
 .scene .smoke{animation:rise 3.6s ease-out infinite;transform-box:fill-box;transform-origin:50% 100%}
@@ -364,7 +370,7 @@ th{background:color-mix(in srgb,var(--line) 40%,transparent)}
         </table>
         <p class="note">전투력은 <b>기병 ≫ 살수병 &gt; 궁병</b>이고, 모병비도 같은 순서입니다. 병종 사이의 상성은 없습니다 — 전력은 병력 × 전투력이고, 차이는 성과 땅에서 납니다. 다만 <b>세력마다 병종 전투력이 다릅니다</b> (살수병 / 궁병 / 기병 / 화포): 조선 0.9 / <b>1.3</b> / 0.85 / 1.15 · 후금 1.0 / 1.05 / <b>1.2</b> / 0.7 · 북원 1.0 / 1.05 / <b>1.3</b> / 0.7 · 왜국 <b>1.3</b> / 0.95 / 0.85 / 0.7 · 명 1.0 / 0.95 / 0.85 / <b>1.3</b> · 토착세력 0.9 / 0.95 / 0.85 / — (일본의 다이묘는 왜국과 같음). 전투 화면과 컴퓨터끼리의 계산이 같은 값을 씁니다. 기병은 들판의 최강이지만 비싸고 성 앞에서 힘을 잃으며, 궁병은 약하지만 싸고 성 안에서 가장 크게 강해집니다. 수비측이라고 따로 받는 보정은 없습니다 — 지키는 쪽의 이점은 오직 성에서 나옵니다.</p>
         <h3>수군과 상륙전</h3>
-        <p class="note">수군은 싸우지 않고 군사를 실어 나르기만 합니다. <b>배 1척에 군사 3部</b>를 실을 수 있고, 해로 출진에는 그만큼의 배가 있어야 합니다(모자라면 일부 군사는 남음). 컴퓨터끼리는 해전이 없어 적 항구의 배는 싸움에 끼지 않다가 그 땅이 함락되면 불탑니다. 다만 <b>플레이어가 낀 상륙 공방</b>에서는 수비측 항구에 배가 있으면 <b>해상전</b>을 고를 수 있습니다: 배 1척에 3部만 타고 싸우며(수군 전투력은 조선 1.4 · 왜국 1.15 · 명 0.9 · 후금·북원 0.45 — 화포병도 3部 안에 셈 · <b>기병은 배 위에서 싸우지 못하고 자리만 차지함</b>), 수비가 이기면 상륙을 막고 적은 귀항합니다. <b>수비가 지면 상륙전·공성전 없이 그 땅을 잃고</b>, 배에 못 탄 군사와 살아남은 군사는 이웃 아군 영지로 흩어집니다(갈 곳이 없으면 사라짐). 배만 있고 지상군이 없는 땅은 빈 땅처럼 싸움 없이 차지됩니다. 수군은 육로 공격에는 동행하지 않습니다.</p>
+        <p class="note">수군은 싸우지 않고 군사를 실어 나르기만 합니다. <b>배 1척에 군사 3部</b>를 실을 수 있고, 해로 출진에는 그만큼의 배가 있어야 합니다(모자라면 일부 군사는 남음). 컴퓨터끼리는 해전이 없어 적 항구의 배는 싸움에 끼지 않다가 그 땅이 함락되면 불탑니다. 다만 <b>플레이어가 낀 상륙 공방</b>에서는 수비측 항구에 배가 있으면 <b>해상전</b>을 고를 수 있습니다: 배 1척에 3部만 타고 싸우며(수군 전투력은 조선 1.4 · 왜국 1.15 · 명 0.9 · 후금·북원 0.45 — 화포병도 3部 안에 셈 · <b>기병은 배 위에서 싸우지 못하고 자리만 차지함</b>), 수비가 이기면 상륙을 막고 적은 귀항합니다. <b>수비가 지면 상륙전·공성전 없이 그 땅을 잃고</b>, 배에 못 탄 군사와 살아남은 군사는 이웃 아군 영지로 흩어집니다(갈 곳이 없으면 사라짐). 플레이어가 낀 상륙전에서 수비가 지면, <b>해상전·물가 상륙전</b>을 골랐을 때는 살아남은 배가 가까운 아군 항구로 물러나지만 <b>평원전·공성전</b>을 골랐을 때는 배가 싸움에 끼지 못하고 모두 불탑니다(고를 때 경고가 뜸). 배만 있고 지상군이 없는 땅은 빈 땅처럼 싸움 없이 차지됩니다. 수군은 육로 공격에는 동행하지 않습니다.</p>
         <p class="note"><b>바닷길은 시간이 걸립니다</b>: 치소 간 거리에 따라 <b>1~5턴</b> 항해한 뒤에 도착합니다 (200km 미만 1턴 · 350km 미만 2턴 · 500km 미만 3턴 · 700km 미만 4턴 · 그 이상 5턴. 예: 대마도→치쿠젠 1턴, 전라→제주 2턴, 황해→등주 3턴). 항해 중인 함대는 지도에 배와 남은 턴으로 표시되고, 바다 위에서도 군량을 먹습니다. 아군 땅에 닿으면 합류하고, 적 땅에 닿으면 싸웁니다. 성이 없는 땅에서는 <b>상륙전</b>: 배 위에서 쏘는 궁병·화포는 제 힘을 다 내지만, <b>뭍에 내려 싸우는 군사는 뱃길이 길수록 힘이 빠집니다</b>(1턴 뱃길 70% → 5턴 40%). 성이 있는 땅에서 수비가 성에서 버티면 <b>공성전</b>이라 상륙의 불리함이 없습니다. 플레이어가 낀 싸움에서는 전투 화면의 작전 회의에서 수비측이 <b>싸울 곳</b>(상륙전·해상전·공성전·평원전)을 고르고, 컴퓨터가 수비면 컴퓨터가 제게 유리해 보이는 곳을 고릅니다. 지거나 남은 군사는 같은 턴 수를 들여 출발한 항구로 돌아갑니다. 플레이어가 낀 상륙전에서는 <b>지면 치열한 만큼 배도 잃고</b>(치열함 × 50%, 군사가 전멸하면 배를 모두 잃음), 수비측 화포에 가라앉은 배도 잃습니다. 바다 건너 구원군은 제때 닿지 못하므로, 구원군은 육로로만 보낼 수 있습니다.</p>
         <h3>화포병</h3>
         <p class="note">화포병(값은 땅마다 다르고 이웃 땅과 이어져 점점 바뀜: 강남 145兩 안팎 · 북경 155 · 요서 175 · 조선 180~195 · 만주·초원 195~210 · 일본 210~225兩, 군량 3. 다른 병종 값도 땅의 차이가 경계에서 점진적으로 바뀜)은 <b>평원·수비·공성 어디서나</b> 포를 쏩니다 (전투력 3, 성벽 보정은 받지 않음). <b>배로도 옮길 수 있고</b> 배 1척에 3部 규칙을 그대로 따르며, 상륙전에서는 배 위에서 쏘아 제 힘을 다 냅니다. 성을 칠 때 화포는 성벽 손상을 키웁니다: 치열함 × (2 + 화포병 수 ÷ 6)단계 — 6部 이상이면 거센 공격에 최대 3단계까지 무너집니다 (5단계 성 → 2단계, 함락이든 수성이든). <b>공격 한 번에 끌고 갈 수 있는 화포병은 6部까지</b>입니다 (협공이면 합쳐서 6部, 나머지는 남음 — 만드는 수에는 제한 없음). 함께 간 군사가 모두 쓰러지면 화포는 버려집니다. 수비하던 땅이 함락되면 그 땅의 화포도 잃습니다.</p>
@@ -392,7 +398,7 @@ th{background:color-mix(in srgb,var(--line) 40%,transparent)}
         <h3>사건(랜덤 이벤트)</h3>
         <p class="note">매 턴 30% 확률로 한 가지 사건이 일어나며, 소문에 「사건」 표시와 효과가 함께 적힙니다: 풍년(2턴 수입 +10%, 민심 +2) · 흉년(수입 −10%, 민심 −2) · 장마(2턴 군량 +10%, 해로 출진 전력 ×0.85) · 소금값 상승(3턴 해안 영지 수입 +5%) · 말 값 상승/하락(2턴 기병 모병비 ±) · 흉조/길조(민심 ∓2) · 역병(한 영지 민심 −5, 주둔군 10% 손실) · 도적 떼(살수병 1 손실, 민심 −3, 금고 −3%) · 상단 교역(금고에 수입의 25%). 진행 중인 사건은 상단 표시줄에 남은 턴 수와 함께 표시되고, 적국에도 같은 사건이 일어나 가끔 소문으로 들립니다.</p>
         <h3>저장</h3>
-        <p class="note">오른쪽 위 메뉴(≡)의 「저장」으로 현재 시점에 이름을 붙여 보관하고, 「불러오기」로 그 시점부터 다시 시작할 수 있습니다. 새 게임 화면에서도 불러올 수 있습니다. 진행 중인 게임은 <b>행동할 때마다 자동 저장</b>되어, 게임 도중 창을 닫아도 다시 열면 그 자리에서 이어집니다 (자동 저장은 하나뿐이라 새 게임을 시작하면 덮어씁니다). 저장은 이 기기의 브라우저 안에만 남습니다 (다른 기기·시크릿 창에서는 보이지 않고, 브라우저 데이터를 지우면 함께 지워짐). <b style="color:var(--danger)">⚠ 지도·영지 구성이 바뀌는 큰 업데이트가 있으면 자동 저장과 저장해 둔 게임을 더는 불러오지 못할 수 있습니다.</b></p>
+        <p class="note">오른쪽 위 메뉴(≡)의 「저장」으로 현재 시점에 이름을 붙여 보관하고, 「불러오기」로 그 시점부터 다시 시작할 수 있습니다. 새 게임 화면에서도 불러올 수 있습니다. 진행 중인 게임은 <b>행동할 때마다 자동 저장</b>되어, 게임 도중 창을 닫아도 다시 열면 그 자리에서 이어집니다 (자동 저장은 하나뿐이라 새 게임을 시작하면 덮어씁니다). 저장은 이 기기에 남고, 앱·웹판에서 메뉴(≡)의 「구글 계정으로 로그인」을 하면 자동 저장과 이름 붙인 저장이 <b>구글 계정에도 보관</b>되어 다른 기기에서 같은 계정으로 로그인해 이어 할 수 있습니다. <b style="color:var(--danger)">⚠ 지도·영지 구성이 바뀌는 큰 업데이트가 있으면 자동 저장과 저장해 둔 게임을 더는 불러오지 못할 수 있습니다.</b></p>
         <h3>지도</h3>
         <p class="note">해안선은 Natural Earth 10m, 행정 경계는 amCharts 지리 데이터(성·도·현 단위)를 썼습니다. 투영은 람베르트 정각원추(표준위선 30°·48°). 한반도 8도·일본 지방은 실제 행정 경계를 그대로 합친 것이고, 만주·내몽골·하북·산동·연해주·홋카이도는 성 경계 안에서 치소 간 거리에 지형 노이즈를 섞어 나눈 것입니다. 접경은 지도상 실제로 맞닿은 영지끼리만 성립합니다.</p>
         <h3>승리 조건</h3>
@@ -412,7 +418,7 @@ th{background:color-mix(in srgb,var(--line) 40%,transparent)}
         </table>
         <p class="note">Strength runs <b>cavalry ≫ spearmen &gt; archers</b>, and so does the cost. There is no rock-paper-scissors between units — an army's power is simply units × strength, and the difference comes from walls and land. But <b>each court's units differ in strength</b> (spearmen / archers / cavalry / guns): Joseon 0.9 / <b>1.3</b> / 0.85 / 1.15 · Later Jin 1.0 / 1.05 / <b>1.2</b> / 0.7 · Northern Yuan 1.0 / 1.05 / <b>1.3</b> / 0.7 · Wa <b>1.3</b> / 0.95 / 0.85 / 0.7 · Ming 1.0 / 0.95 / 0.85 / <b>1.3</b> · natives 0.9 / 0.95 / 0.85 / — (Japan's daimyo fight like Wa). The battle screen and the computer-only battles use the same values. Cavalry rules the open field but is expensive and loses its edge in front of walls; archers are weak and cheap but gain the most behind walls. Defenders get no bonus of their own — the only defensive advantage comes from walls.</p>
         <h3>Ships and landings</h3>
-        <p class="note">Ships do not fight; they only carry troops. <b>One ship carries 3 units</b>, and a sea expedition needs that many ships (any troops without a ship stay behind). Between computer courts there are no naval battles: ships in an enemy port take no part in the fight and burn when the town falls. But <b>in a landing fight involving the player</b>, a defender with ships in port may choose a <b>sea battle</b>: only 3 units per ship fight (navy strength Joseon 1.4 · Wa 1.15 · Ming 0.9 · Later Jin and Northern Yuan 0.45 — artillery counts toward the 3 units · <b>cavalry cannot fight at sea and only takes up room</b>); if the defender wins, the landing is stopped and the enemy sails home. <b>If the defender loses, the province falls with no landing or siege</b>, and the troops who could not board plus the survivors scatter to neighbouring friendly provinces (vanishing if there are none). A town held only by ships and no land troops is taken without a fight. Ships never join an attack over land.</p>
+        <p class="note">Ships do not fight; they only carry troops. <b>One ship carries 3 units</b>, and a sea expedition needs that many ships (any troops without a ship stay behind). Between computer courts there are no naval battles: ships in an enemy port take no part in the fight and burn when the town falls. But <b>in a landing fight involving the player</b>, a defender with ships in port may choose a <b>sea battle</b>: only 3 units per ship fight (navy strength Joseon 1.4 · Wa 1.15 · Ming 0.9 · Later Jin and Northern Yuan 0.45 — artillery counts toward the 3 units · <b>cavalry cannot fight at sea and only takes up room</b>); if the defender wins, the landing is stopped and the enemy sails home. <b>If the defender loses, the province falls with no landing or siege</b>, and the troops who could not board plus the survivors scatter to neighbouring friendly provinces (vanishing if there are none). In a landing fight involving the player, a defender who loses <b>at sea or on the shore</b> sees its surviving ships fall back to the nearest friendly port, but one who chose a <b>field battle or siege</b> loses every ship in port, which never joined the fight (a warning appears when choosing). A town held only by ships and no land troops is taken without a fight. Ships never join an attack over land.</p>
         <p class="note"><b>Sea routes take time</b>: depending on the distance between the two seats, a voyage takes <b>1–5 turns</b> (under 200 km 1 turn · under 350 km 2 turns · under 500 km 3 turns · under 700 km 4 turns · beyond that 5 turns; e.g. Tsushima→Chikuzen 1 turn, Jeolla→Jeju 2 turns, Hwanghae→Dengzhou 3 turns). Fleets at sea are shown on the map with a ship and the turns left, and they still eat rations. A fleet that reaches friendly land joins the garrison; one that reaches enemy land fights. Where there are no walls it is a <b>landing battle</b>: archers and guns firing from the ships keep full strength, but <b>troops fighting ashore lose more strength the longer the voyage</b> (70% after a 1-turn crossing down to 40% after 5). Where there are walls and the defenders hold them, it is a <b>siege</b> with no landing penalty. In battles involving the player, the defending side picks <b>where to fight</b> (landing, at sea, siege or field) in the war council on the battle screen; a computer defender picks whatever looks best for it. Survivors of a failed landing sail home, taking as many turns again. In a landing battle involving the player, <b>the loser also loses ships in proportion to the fierceness</b> (fierceness × 50%; if the whole force is wiped out, every ship is lost), and ships sunk by the defenders' guns are lost too. Relief forces cannot cross the sea in time, so they can only be sent overland.</p>
         <h3>Artillery</h3>
         <p class="note">Artillery (cost varies by land and shifts gradually between neighbouring lands: about 145 gold in Jiangnan · 155 at Beijing · 175 in Liaoxi · 180–195 in Korea · 195–210 in Manchuria and the steppe · 210–225 in Japan; upkeep 3. Other unit costs likewise change gradually across borders) fires <b>in the field, on defense and in sieges alike</b> (strength 3, no wall bonus). It <b>can go by ship</b> under the same 3-units-per-ship rule, and in a landing battle it fires from the ships at full strength. When storming a castle, artillery adds to the wall damage: fierceness × (2 + artillery units ÷ 6) levels — with 6 or more, a fierce assault can bring down as many as 3 levels (a level-5 castle drops to level 2, whether it falls or holds). <b>An attack can take at most 6 artillery units</b> (6 in total for a joint attack; the rest stay behind — there is no limit on how many you raise). If every soldier with them falls, the guns are abandoned. Guns in a town that falls are lost.</p>
@@ -440,7 +446,7 @@ th{background:color-mix(in srgb,var(--line) 40%,transparent)}
         <h3>Events</h3>
         <p class="note">Each turn there is a 30% chance of an event, reported in the rumors with an "event" mark and its effect: good harvest (income +10% for 2 turns, morale +2) · poor harvest (income −10%, morale −2) · monsoon rains (upkeep +10% for 2 turns, sea expeditions ×0.85) · salt prices rise (coastal income +5% for 3 turns) · horse prices rise/fall (cavalry cost ± for 2 turns) · ill/good omen (morale ∓2) · plague (one province morale −5, 10% of its garrison lost) · bandits (1 spearman unit lost, morale −3, treasury −3%) · caravan trade (25% of income into the treasury). Ongoing events are shown in the top bar with the turns left; rival courts get the same events, and you sometimes hear of them through rumors.</p>
         <h3>Saving</h3>
-        <p class="note">"Save" in the ≡ menu at the top right keeps the current moment under a name, and "Load" lets you start again from it. You can also load from the new-game screen. The game in progress is <b>saved automatically after every action</b>, so if you close the window mid-game it picks up right there when you reopen it (there is only one autosave, and starting a new game overwrites it). Saves stay only in this device's browser (they are not visible on other devices or in private windows, and clearing the browser's data erases them). <b style="color:var(--danger)">⚠ After a major update that changes the map or provinces, the autosave and your saved games may no longer load.</b></p>
+        <p class="note">"Save" in the ≡ menu at the top right keeps the current moment under a name, and "Load" lets you start again from it. You can also load from the new-game screen. The game in progress is <b>saved automatically after every action</b>, so if you close the window mid-game it picks up right there when you reopen it (there is only one autosave, and starting a new game overwrites it). Saves stay on this device, and in the app or web version, choosing "Sign in with Google" in the ≡ menu <b>also keeps</b> your autosave and named saves <b>in your Google account</b>, so you can sign in on another device and carry on. <b style="color:var(--danger)">⚠ After a major update that changes the map or provinces, the autosave and your saved games may no longer load.</b></p>
         <h3>The map</h3>
         <p class="note">Coastlines come from Natural Earth 10m and administrative borders from amCharts geodata (province / prefecture level). The projection is Lambert conformal conic (standard parallels 30° and 48°). Korea's eight provinces and Japan's regions merge the real administrative borders; Manchuria, Inner Mongolia, Hebei, Shandong, Primorye and Hokkaido are divided inside provincial borders by distance from each seat with some terrain noise. Provinces border each other only where they actually touch on the map.</p>
         <h3>Victory</h3>
@@ -759,6 +765,7 @@ async function landFleet(v){
   const fleet={id:v.from,name:S.p[v.from].name,owner,army:{...v.u},coastal:true,acted:true,morale:MORALE_BASE,fleet:true}; // 배 위의 군대(어느 영지에도 속하지 않음)
   const c={from:fleet,et:'sea',u:{...v.u},dist:v.dist,turns:v.turns,atk:evMult(owner,'rain_sea'),fleet:true};
   const wasP=to.owner===P, hostile=cnt(to.army,LAND)>0;
+  if(hostile&&!UI.over&&cnt(v.u,LAND)){ if(wasP) await scene('invade',L(`${to.name} 해안에 적선 출몰`,`Enemy ships off ${to.name}`),L(`${fname(owner)} 함대가 ${armyIcons(v.u,LAND)}을 싣고 상륙합니다 — 바닷가 백성들이 달아납니다`,`A ${fname(owner)} fleet is landing ${armyIcons(v.u,LAND)} — the coastal folk are fleeing`),3200,FCOL[owner]); else if(owner!==P&&!S.spec&&!(UI.warN>=1)&&(UI.warN=(UI.warN||0)+1)) await scene('war',L(`${fname(owner)} ⚔ ${to.owner==='neutral'?'토착 민병':fname(to.owner)}`,`${fname(owner)} ⚔ ${to.owner==='neutral'?'native militia':fname(to.owner)}`),L(`${to.name} 해안에 상륙전이 벌어졌습니다`,`A landing battle rages on the coast of ${to.name}`),2200,FCOL[owner],FCOL[to.owner]||'#A49C8C'); }
   await march(v.from,to.id,hostile?'attack':'occupy',owner,'sea',hostile?1100:850);
   let r;
   if(owner===P||wasP){ if(wasP&&hostile&&!UI.over&&cnt(v.u,LAND)) await askReinforce(owner,{from:v.from,to:to.id,send:v.u,srcs:[{id:v.from,u:v.u}],sea:true}); r=await playerBattle(null,to.id,c); settleReinforcements(to); }
@@ -782,7 +789,7 @@ function resolveCons(cons,toId,pre){ // 맞붙는 부대(cons)로 전투를 치�
     log(L(`${fname(owner)}: ${main.from.name}→${to.name} 이동 (${armyStr(rep.sent)})`,`${fname(owner)}: moved ${main.from.name}→${to.name} (${armyStr(rep.sent)})`)); if(owner===P) addRumor('move',{from:main.from,to}); else if(Math.random()<0.25&&neighbors(to.id).some(n=>S.p[n].owner===P)) addRumor('aimove',{to,faction:owner}); return rep; }
   const defender=to.owner; warBetween(owner,defender);
   if(!cnt(to.army,LAND)){ // no land defenders (ships alone cannot hold a town): taken without a fight, the ships in port burn
-    if(to.army.nav>0) rep.lines.push(L(`항구의 배 ${to.army.nav}척은 불탔습니다`,`${to.army.nav} ships in port were burned`));
+    if(to.army.nav>0) rep.lines.push(L(`항구의 배 ${to.army.nav}척은 적군이 쓰지 못하게 불태워 수장시켰습니다`,`${to.army.nav} ships in port were burned and scuttled so the enemy could not use them`));
     to.owner=owner; to.acted=true; ALL.forEach(t=>to.army[t]=rep.sent[t]); rep.result='occupy';
     log(L(`${fname(owner)}이(가) 빈 땅 ${to.name}을(를) 차지`,`${fname(owner)} took the empty land of ${to.name}`),'c');
     if(owner===P) addRumor('occupy',{to,faction:defender}); else if(defender===P) addRumor('aiwin',{to,faction:owner,fromJoseon:true});
@@ -802,7 +809,7 @@ function resolveCons(cons,toId,pre){ // 맞붙는 부대(cons)로 전투를 치�
   const fought=[...landCons,...seaCons];
   if(B.win){
     const oldC=to.castle; to.owner=owner; to.castle=pre&&pre.castleWin!=null?pre.castleWin:Math.max(0,to.castle-(bc?wallWear(to.castle,lb,catN):0)); /* 함락도 치열함(+화포)만큼만 깎임 (wallWear) */ to.acted=true; to.build=null; // a half-built wall is lost with the town
-    if(rep.navShips>0) rep.lines.push(L(`항구의 배 ${rep.navShips}척은 불탔습니다`,`${rep.navShips} ships in port were burned`)); LAND.forEach(t=>to.army[t]=B.a[t]); to.army.nav=seaAtt.nav||0; to.army.cat=B.a.cat||0;
+    if(rep.navShips>0) rep.lines.push(L(`항구의 배 ${rep.navShips}척은 적군이 쓰지 못하게 불태워 수장시켰습니다`,`${rep.navShips} ships in port were burned and scuttled so the enemy could not use them`)); LAND.forEach(t=>to.army[t]=B.a[t]); to.army.nav=seaAtt.nav||0; to.army.cat=B.a.cat||0;
     rep.result='win'; log(L(`${fname(owner)}이(가) ${to.name} 점령${oldC?` (성 ${oldC}→${to.castle}단계)`:''}`,`${fname(owner)} captured ${to.name}${oldC?` (castle level ${oldC}→${to.castle})`:''}`),'c');
     bump(to,-10); bumpAll(owner,2,true); if(defender!=='neutral'){ bumpAll(defender,-2,true); setRel(owner,defender,-7); } // a victory lifts the whole nation, a lost town shakes the loser's
     if(owner===P) addRumor('win',{to,faction:defender}); else if(defender===P) addRumor('aiwin',{to,faction:owner,fromJoseon:true}); else if(Math.random()<0.6) addRumor('aiattack',{to,faction:owner,def:defender,win:true});
@@ -852,6 +859,15 @@ function aiVenue(base,to,F){ // 컴퓨터 수비가 고르는 싸울 곳: 제게
 function scatterTo(owner,fromId,u){ // 싸우지 못하고 무너진 군사: 이웃 아군 영지(육로)로 흩어짐 — 갈 곳이 없으면 사라짐
   const ns=neighbors(fromId).map(n=>S.p[n]).filter(q=>q.owner===owner&&q.id!==fromId&&edgeType(fromId,q.id)==='land'); let n=0;
   if(!ns.length) return 0; CARRY.forEach(t=>{ for(let i=0;i<(u[t]||0);i++){ ns[i%ns.length].army[t]++; n++; } }); return n; }
+const fleePort=(owner,fromId)=>provsOf(owner).filter(q=>q.coastal&&q.id!==fromId).sort((a,b)=>seaDist(a.id,fromId)-seaDist(b.id,fromId))[0]||null; // 싸움에 진 함대가 물러날 가장 가까운 아군 항구
+function navWarn(to){ // 상륙전 수비(플레이어): 항구에 배가 있으면 「싸울 곳」 고를 때 경고 — 모듈 화면 위에 띄우고, 고른 싸울 곳에 따라 강조
+  const n=to.army.nav||0, port=fleePort(P,to.id); if(!n) return ()=>{};
+  const d=document.createElement('div'); d.className='navwarn';
+  const txt=sel=>{ const bad=sel==='field'||sel==='siege'; return `<button class="x" aria-label="close">×</button><b>⚠ ${L(`${to.name} 항구에 배 ${n}척`,`${n} ships in port at ${to.name}`)}</b><br>${bad?L(`<span class="hot">평원전·공성전에서는 배가 싸움에 끼지 못하고, 지면 ${n}척을 적군이 사용 못하게 모두 불태워 수장시킵니다.</span>`,`<span class="hot">In a field battle or siege the ships take no part, and if you lose, all ${n} are burned and scuttled so the enemy cannot use them.</span>`):L(`평원전·공성전을 골라 지면 배 ${n}척을 적군이 사용 못하게 모두 불태워 수장시킵니다. 해상전·상륙전에서 지면 살아남은 배는 ${port?port.name+'(으)로':'— 물러날 항구가 없어 —'} 물러납니다.`,`If you pick a field battle or siege and lose, all ${n} ships are burned and scuttled so the enemy cannot use them. Lose at sea or on the shore and the surviving ships fall back${port?' to '+port.name:' — but there is no port to fall back to'}.`)}`; };
+  let last=null, gone=false; d.innerHTML=txt(null); document.body.appendChild(d); d.addEventListener('click',e=>{ if(e.target.classList.contains('x')){ gone=true; d.remove(); } });
+  const iv=setInterval(()=>{ if(gone) return; const h=document.querySelector('.dbyg-battle-host'); const R=h&&h.shadowRoot; if(!R) return; const go=R.querySelector('#btnGo'); if(go&&(go.hidden||go.offsetParent===null)&&last!==null){ stop(); return; }
+    const b=R.querySelector('.opt[data-g="venue"][aria-pressed="true"]'); const k=b?b.dataset.k:'landing'; if(k!==last){ last=k; d.innerHTML=txt(k); d.classList.toggle('bad',k==='field'||k==='siege'); } },250);
+  const stop=()=>{ clearInterval(iv); d.remove(); }; return stop; }
 async function playerBattle(srcs,toId,fc){ // 플레이어가 낀 전투는 전투 화면(DBYGBattle)에서 직접 싸워 승패를 정하고, 그 결과로 전투를 마무리 · fc: 도착한 함대(상륙)
   const to=S.p[toId];
   if(!fc){ const seaS=srcs.filter(s=>edgeType(s.id,toId)==='sea'); if(seaS.length){ const r0=dispatchJoint(seaS,toId); srcs=srcs.filter(s=>edgeType(s.id,toId)!=='sea'); if(!srcs.length) return r0; } } // 배로 가는 부대는 먼저 출항
@@ -872,8 +888,9 @@ async function playerBattle(srcs,toId,fc){ // 플레이어가 낀 전투는 전�
   else { opts.allowField=false; opts.allowNaval=false; if(mode==='naval') D.navalMax=navCap; }
   if(!SFX.on) opts.sound=false;
   UI.inBattle=true; let R=null;
+  const stopWarn=defOwner===P&&base==='landing'?navWarn(to):()=>{};
   try{ R=await DBYGBattle.open(opts); }catch(e){ console.error(e); }
-  finally{ UI.inBattle=false; UI.battleEnd=Date.now(); }
+  finally{ stopWarn(); UI.inBattle=false; UI.battleEnd=Date.now(); }
   if(!R||!R.remain) return fin();
   const got=R.mode||mode, iA=attFirst?0:1, iD=1-iA, remA=R.remain[iA], remD=R.remain[iD];
   const attWin=R.win===-1?false:R.win===iA;
@@ -885,19 +902,25 @@ async function playerBattle(srcs,toId,fc){ // 플레이어가 낀 전투는 전�
     const nv=R.naval||{}, sunk=s2=>nv.ships&&nv.ships[s2]?Math.min(1,(nv.shipsSunk?nv.shipsSunk[s2]:0)/nv.ships[s2]):0;
     const fleetSunk=fc&&fc.u.nav?Math.round(fc.u.nav*sunk(iA)):0; // 가라앉은 공격측 배 — 싸움이 끝난 뒤 함대(또는 점령지)에서 뺌
     let r;
-    if(attWin){ r=fin({B:{win:true,a,d:{cav:0,arc:0,inf:0,nav:0,cat:0},landB:{rounds:[],win:true,a,d:{},screen:true}},castleWin:to.castle});
+    let shipsGone=0, shipsFled=0, fledTo=null;
+    if(attWin){ const keep=Math.max(0,(to.army.nav||0)-Math.round((to.army.nav||0)*sunk(iD))); fledTo=fleePort(defOwner,toId); if(fledTo&&keep){ shipsFled=keep; to.army.nav=0; } else shipsGone=to.army.nav||0; /* 해상전에 져도 살아남은 배는 가까운 아군 항구로 */
+      r=fin({B:{win:true,a,d:{cav:0,arc:0,inf:0,nav:0,cat:0},landB:{rounds:[],win:true,a,d:{},screen:true}},castleWin:to.castle});
+      if(shipsFled){ fledTo.army.nav+=shipsFled; r.lines.push(L(`살아남은 배 ${shipsFled}척이 ${fledTo.name}(으)로 물러났습니다`,`${shipsFled} surviving ships fell back to ${fledTo.name}`)); }
       const n=scatterTo(defOwner,toId,left); r.lines.push(L(`해상전에서 져 ${to.name}을(를) 잃었습니다 — 수비군 ${cnt(left,CARRY)}部 중 ${n}部가 이웃 영지로 흩어짐`,`Lost the sea battle and ${to.name} with it — of ${cnt(left,CARRY)} defending units, ${n} scattered to neighbouring provinces`)); }
     else { left.nav=Math.max(0,(to.army.nav||0)-Math.round((to.army.nav||0)*sunk(iD))); if(!cnt(left,LAND)) btKeepOne(left,remD,defIn);
       r=fin({B:{win:false,a,d:left,landB:{rounds:[],win:false,a,d:left,screen:true}},castleLose:to.castle}); r.lines.push(L(`해상전에서 이겨 상륙을 막았습니다`,`Won the sea battle and stopped the landing`)); }
     if(fleetSunk){ const hold=attWin?to:fc.from; hold.army.nav=Math.max(0,(hold.army.nav||0)-fleetSunk); }
-    r.screen=R; return r; }
+    r.screen=R; if(shipsGone&&defOwner===P) await shipBurnScene(shipsGone,to); return r; }
   const d=btBack(remD,defIn,1); d.nav=to.army.nav; if(!attWin) btKeepOne(d,remD,defIn);
   const pre={B:{win:attWin,a,d,landB:{rounds:[],win:attWin,a,d,screen:true}}};
+  let burnN=0, fledN=0, fledP=null; if(fc&&attWin&&(to.army.nav||0)>0){ if(got==='landing'){ fledP=fleePort(defOwner,toId); if(fledP){ fledN=to.army.nav; to.army.nav=0; d.nav=0; } else burnN=to.army.nav; } else burnN=to.army.nav; } // 물가 상륙전에 지면 배는 물러나고, 평원전·공성전에 지면 항구의 배는 불탐
   if(got==='siege'&&to.castle>0&&R.siege){ const fz=R.siege.fierce!=null?Math.max(0,Math.min(1,+R.siege.fierce||0)):Math.min(1,(R.siege.wallWear||0)/Math.max(.01,to.castle*0.4)), drop=Math.min(to.castle,probRound(fz*(WALL_WEAR+catWear(F.att.cat)))); /* 치열함 × (2 + 화포병/6) (본게임 wallWear 식) */
     if(attWin) pre.castleWin=Math.max(0,to.castle-drop); else pre.castleLose=Math.max(0,Math.min(R.siege.newLevel|0,to.castle-drop)); }
   if(got!=='siege'&&to.castle>0) pre.field=true; // 들판·바닷가에서 싸우면 성벽은 상하지 않음
   const flee=attWin&&defOwner===P&&R.retreat?btBack(remD,defIn,1):null; // 총퇴각한 내 수비군은 이웃 아군 영지로 물러남
   const r=fin(pre); r.screen=R;
+  if(fledN){ fledP.army.nav+=fledN; r.lines.push(L(`항구의 배 ${fledN}척이 ${fledP.name}(으)로 물러났습니다`,`${fledN} ships in port fell back to ${fledP.name}`)); }
+  if(burnN&&defOwner===P) await shipBurnScene(burnN,to);
   if(fc&&got==='landing'&&R.landing&&R.landing.ships>0&&(fc.u.nav||0)>0){ // 상륙전에서 잃은 배(지고 물러나며 잃은 배 + 포탄에 가라앉은 배): 모듈의 배 수 비율대로 본게임 함대에서 뺌 — 전멸하면 모두
     const Lr=R.landing, nav=fc.u.nav, gone=Lr.wiped&&!attWin?nav:Math.min(nav,probRound(nav*Math.min(1,(+Lr.shipsLost||0)/Lr.ships))), hold=attWin?to:fc.from;
     if(gone>0){ hold.army.nav=Math.max(0,(hold.army.nav||0)-gone); r.lines.push(L(`상륙전에서 ${fname(attOwner)} 배 ${gone}척을 잃었습니다`,`${fname(attOwner)} lost ${gone} ships in the landing`)); log(L(`${fname(attOwner)}: ${to.name} 상륙전에서 배 ${gone}척 손실`,`${fname(attOwner)}: ${gone} ships lost in the landing at ${to.name}`)); } }
@@ -1059,7 +1082,7 @@ function intelReports(){ // own doings, dangers worth acting on, and one report 
 let EVENTS=null;
 const specSpd=()=>S&&S.spec?(UI.specSpeed||1):1; // 관전 모드 속도: 1·2·4배, 8배는 애니메이션을 생략
 const march=(f,to,kind,owner,et,dur)=>specSpd()>=8?Promise.resolve():new Promise(res=>marchAnim(f,to,kind,owner,et,Math.max(250,dur/specSpd()),res));
-const scene=(kind,t1,t2,ms,col)=>specSpd()>=8?Promise.resolve():new Promise(res=>showScene(kind,t1,t2,Math.max(1200,ms/specSpd()),res,col));
+const scene=(kind,t1,t2,ms,col,col2)=>specSpd()>=8?Promise.resolve():new Promise(res=>showScene(kind,t1,t2,Math.max(1200,ms/specSpd()),res,col,col2));
 async function endTurn(){
   if(UI.over||UI.busy) return;
   const token=++UI.turnToken; UI.busy=true; UI.aiTurn=true; UI.pending=null; setSheet('peek'); renderTurn(); renderSel();
@@ -1265,7 +1288,7 @@ function aiRear(fid){ // interior armies march toward the front one province a t
 async function runAI(token){
   const stale=()=>UI.turnToken!==token; // the rescue button abandons a stuck turn: stop touching the game then
   for(const fid of AIS_()){
-    const F=S.f[fid]; if(!F.alive) continue; progressBuilds(fid); moraleTick(fid); await playFalls(); if(stale()) return; if(!F.alive) continue; rollEvent(fid); F.gold+=income(fid); hoardTick(fid); /* too much treasure: the court grows lax, and feasting and waste eat the surplus */ applyUpkeep(fid); fiscalRumors(fid);
+    const F=S.f[fid]; if(!F.alive) continue; UI.warN=0; progressBuilds(fid); moraleTick(fid); await playFalls(); if(stale()) return; if(!F.alive) continue; rollEvent(fid); F.gold+=income(fid); hoardTick(fid); /* too much treasure: the court grows lax, and feasting and waste eat the surplus */ applyUpkeep(fid); fiscalRumors(fid);
     await landFleets(fid); if(stale()) return; if(!F.alive) continue;
     aiEconomy(fid); const plans=aiPlans(fid);
     for(const pl of plans){
@@ -1277,6 +1300,7 @@ async function runAI(token){
       else if(!UI.over&&q.owner!=='neutral'&&q.owner!==P&&wantsHelp(fid,q,srcs)) await askReinforce(fid,{from:main.id,to:pl.to,send:sumU(srcs.map(s=>s.u)),srcs},q.owner); if(stale()) return;
       const aid=!UI.over&&q.owner!=='neutral'&&q.owner!==P&&!q.reinf?await aiAidDefense(fid,q):null; if(stale()) return; // a friendly third court may rush troops in
       const anySea=srcs.some(s=>edgeType(s.id,pl.to)==='sea'); const hostile=cnt(q.army,LAND)>0||(anySea&&q.army.nav>0);
+      if(hostile&&!UI.over){ if(wasP) await scene('invade',L(`${q.name} 위급`,`${q.name} in peril`),L(`${fname(fid)}의 대군 ${armyIcons(sumU(srcs.map(s=>s.u)),LAND)}이 몰려옵니다 — 백성들이 피란길에 오릅니다`,`A great ${fname(fid)} host ${armyIcons(sumU(srcs.map(s=>s.u)),LAND)} is bearing down — the people are fleeing`),3200,FCOL[fid]); else if(q.owner!==P&&!S.spec&&!(UI.warN>=1)){ UI.warN=(UI.warN||0)+1; await scene('war',L(`${fname(fid)} ⚔ ${q.owner==='neutral'?'토착 민병':fname(q.owner)}`,`${fname(fid)} ⚔ ${q.owner==='neutral'?'native militia':fname(q.owner)}`),q.owner==='neutral'?L(`${q.name}의 토착 민병이 ${fname(fid)} 군에 맞서 싸웁니다`,`The native militia of ${q.name} fights the ${fname(fid)} army`):L(`${q.name}에서 두 나라 군대가 맞붙었습니다`,`The two courts' armies clash at ${q.name}`),2200,FCOL[fid],FCOL[q.owner]||'#A49C8C'); } } if(stale()) return;
       await Promise.all(srcs.map(s=>march(s.id,pl.to,hostile?'attack':'occupy',fid,edgeType(s.id,pl.to),hostile?1100:850))); if(stale()) return;
       const r=wasP?await playerBattle(srcs,pl.to):dispatchJoint(srcs,pl.to); if(stale()) return; const helped=UI.helped&&UI.helped.to===pl.to?UI.helped:null; UI.helped=null; settleReinforcements(q); render(); if(r.error) continue;
       if(wasP&&!r.screen){ if(r.result==='win'||r.result==='occupy') await scene('lose',L(`${q.name} 함락`,`${q.name} has fallen`),L(`${fname(fid)}에 빼앗겼습니다`,`Taken by ${fname(fid)}`),3800);
@@ -1439,7 +1463,7 @@ function addRumor(kind,c={}){
   const rpt=(src,s)=>{ if(!S.spec) lines.push({f:P,src,text:s}); }; const sp=(s,k)=>lines.push({f:k,src:L(`첩자(諜者) · ${fname(k)}`,`Spy (諜者) · ${fname(k)}`),text:s}); // court offices and spies report in their own voice
   switch(kind){
     case 'sail': jo(L(`${from}에서 함대가 떠났습니다. ${c.n}턴 뒤 ${to}에 닿습니다${c.hostile?' — 성이 없는 땅이면 배에서 내려 싸우는 살수병·기병은 제 힘을 다 못 냅니다':''}.`,`The fleet has sailed from ${from}. It reaches ${to} in ${c.n} turns${c.hostile?' — if the land has no castle, spearmen and cavalry fighting off the ships cannot use their full strength':''}.`)); break;
-    case 'fleet_seen': rpt(L('수군 척후(斥候)','Naval scouts (斥候)'),L(`${fac}의 함대가 ${from을} 떠났습니다 — 군사 ${c.units}部. ${c.n}턴 뒤 ${to}에 상륙할 것으로 보입니다. 성에서 버틸지, 바닷가나 바다에서 맞설지 대비하소서.`,`The ${fac} fleet has left ${from} — ${c.units} units aboard. It looks set to land at ${to} in ${c.n} turns. Decide whether to hold the castle or meet them on the shore or at sea.`)); break;
+    case 'fleet_seen': rpt(L('수군 척후(斥候)','Naval scouts (斥候)'),pick([L(`${fac}의 함대가 군사를 싣고 ${from}에서 출항했다는 소문입니다. 어디로 향하는지는 알 수 없습니다 — 바다를 마주한 고을을 살피소서.`,`Rumor has it a ${fac} fleet has sailed from ${from} with troops aboard. Where it is bound, no one knows — look to the towns facing the sea.`),L(`${from} 포구에서 ${fac}의 군선들이 돛을 올렸답니다. 행선지는 감춰져 있습니다.`,`${fac} warships have raised sail at the port of ${from}, they say. Their destination is kept secret.`)])); break;
     case 'landed': jo(L(`함대가 ${to}에 닿아 군사 ${c.n}部가 내렸습니다.`,`The fleet reached ${to} and ${c.n} units went ashore.`)); break;
     case 'unify': fo(c.stage>=2?pick([L(`${fac} 조정이 「하늘 아래 주인은 하나」라며 천하 통일의 깃발을 높이 들었습니다. 사방의 나라를 하나씩 삼킬 기세입니다.`,`The ${fac} court has raised the banner of unification of the realm, declaring 「Under heaven there is but one master」. It seems set to swallow its neighbors one by one.`),L(`${fac}의 군주가 「짐의 대에 천하를 하나로」라 맹세했답니다. 장수들이 앞다투어 출정을 청합니다.`,`They say the ${fac} ruler has sworn 「In my reign, the realm shall be one」. The generals vie to lead the campaign.`)]):pick([L(`${fac} 조정에서 「변방을 지키는 것만으로는 부족하다」는 목소리가 커졌습니다. 이웃 나라를 넘보는 눈빛이 달라졌습니다.`,`At the ${fac} court, voices saying 「Guarding our borders is not enough」 are growing louder. They now eye their neighbors differently.`),L(`${fac}의 장수들이 이웃 나라 지도를 펼쳐 놓고 밤새 군사를 논한답니다. 천하를 향한 야심이 자라고 있습니다.`,`They say the ${fac} generals spread out maps of neighboring realms and debate campaigns all night. Their ambition for the realm is growing.`)]),c.faction); break;
     case 'isle_war': fo(pick([L(`${fac} 관백이 「먼저 열도를 평정한다」며 다이묘들을 하나씩 굴복시키고 있습니다. 바다 건너를 넘보는 것은 그다음이라는 소문입니다.`,`The ${fac} regent has vowed to 「pacify the islands first」 and is bringing the daimyo to heel one by one. Rumor says the lands across the sea will come after.`),L(`${fac}의 군세가 열도의 다이묘 영지로 향합니다. 아직은 칼끝이 안쪽을 향해 있습니다.`,`The ${fac} armies march on the daimyo domains of the islands. For now, their blades point inward.`)]),c.faction); jo(P==='joseon'?L(`${fac이} 일본 열도 평정에 힘을 쏟고 있습니다. 열도를 다 차지하면 바다 건너 — 우리 해안을 노릴 것입니다. 그 사이에 남해안의 성과 수군을 갖추소서.`,`${fac} is pouring its strength into pacifying the Japanese islands. Once it holds them all, it will look across the sea — to our coasts. Use the time to ready the castles and fleet of the south coast.`):L(`${fac이} 일본 열도 평정에 힘을 쏟고 있습니다. 열도를 다 차지하면 바다 건너를 노릴 것입니다.`,`${fac} is pouring its strength into pacifying the Japanese islands. Once it holds them all, it will look across the sea.`)); break;
@@ -1545,61 +1569,150 @@ function fmtDate(ts){ const d=new Date(ts); return `${d.getFullYear()}.${String(
 function showSaveDialog(){
   if(!S||UI.busy) return; const root=document.getElementById('modalRoot'); const slots=loadSlots();
   const def=S.saveName||L(`${PN()} ${S.turn}턴 · ${provsOf(P).length}領`,`${PN()} Turn ${S.turn} · ${provsOf(P).length} provinces`);
-  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>게임 저장</h2><p class="note">${S.saveName?`지난번 이름 「${S.saveName}」이 기본으로 들어 있습니다. 그대로 저장하면 덮어쓰고, 바꾸면 새 저장이 됩니다.`:'이름을 정해 현재 시점을 저장합니다. 같은 이름이면 덮어씁니다.'} 저장은 이 기기의 브라우저에만 남습니다 — 다른 기기에서 이어 하려면 <b>다른 기기로 옮기기</b>로 저장 코드를 만드세요.</p><p class="note">진행 중인 게임은 <b>행동할 때마다 자동 저장</b>되어, 게임 도중 창을 닫아도 다음에 열면 그 자리에서 이어집니다 (자동 저장은 하나뿐이라 새 게임을 시작하면 덮어씀). 오래 두고 싶은 시점은 여기서 이름을 붙여 저장하세요.</p><p class="note" style="color:var(--danger)">⚠ 지도·영지 구성이 바뀌는 <b>큰 업데이트</b>가 있으면 자동 저장과 저장해 둔 게임을 더는 불러오지 못할 수 있습니다.</p>
+  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>게임 저장</h2><p class="note">${S.saveName?`지난번 이름 「${S.saveName}」이 기본으로 들어 있습니다. 그대로 저장하면 덮어쓰고, 바꾸면 새 저장이 됩니다.`:'이름을 정해 현재 시점을 저장합니다. 같은 이름이면 덮어씁니다.'}</p><p class="note cloudline">${cloudLine()}</p><p class="note">진행 중인 게임은 <b>행동할 때마다 자동 저장</b>되어, 게임 도중 창을 닫아도 다음에 열면 그 자리에서 이어집니다 (자동 저장은 하나뿐이라 새 게임을 시작하면 덮어씀). 오래 두고 싶은 시점은 여기서 이름을 붙여 저장하세요.</p><p class="note" style="color:var(--danger)">⚠ 지도·영지 구성이 바뀌는 <b>큰 업데이트</b>가 있으면 자동 저장과 저장해 둔 게임을 더는 불러오지 못할 수 있습니다.</p>
     <label>이름 <input type="text" id="slotName" value="${def}" maxlength="40" style="font:inherit;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg)"></label>
     ${Object.keys(slots).length?`<p class="note" style="margin-top:6px">기존 저장: ${Object.keys(slots).map(n=>`「${n}」`).join(' ')}</p>`:''}
-    <div class="row" style="margin-top:10px;justify-content:flex-end"><button id="svEx">다른 기기로 옮기기</button><button id="svNo">취소</button><button id="svGo" class="primary">저장</button></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Save game</h2><p class="note">${S.saveName?`Your previous save name 「${S.saveName}」 is filled in. Save as is to overwrite it, or change it to make a new save.`:'Choose a name to save the current game. The same name overwrites.'} Saves are kept only in this device's browser — to carry on elsewhere, make a save code with <b>Move to another device</b>.</p><p class="note">The game in progress is <b>saved automatically after every action</b>, so if you close the window mid-game it picks up right there next time (there is only one autosave, and starting a new game overwrites it). Give a name here to any moment you want to keep.</p><p class="note" style="color:var(--danger)">⚠ After a <b>major update</b> that changes the map or provinces, the autosave and your saved games may no longer load.</p>
+    <div class="row" style="margin-top:10px;justify-content:flex-end">${cloudAvail()?'<button id="svEx">구글 계정</button>':''}<button id="svNo">취소</button><button id="svGo" class="primary">저장</button></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Save game</h2><p class="note">${S.saveName?`Your previous save name 「${S.saveName}」 is filled in. Save as is to overwrite it, or change it to make a new save.`:'Choose a name to save the current game. The same name overwrites.'}</p><p class="note cloudline">${cloudLine()}</p><p class="note">The game in progress is <b>saved automatically after every action</b>, so if you close the window mid-game it picks up right there next time (there is only one autosave, and starting a new game overwrites it). Give a name here to any moment you want to keep.</p><p class="note" style="color:var(--danger)">⚠ After a <b>major update</b> that changes the map or provinces, the autosave and your saved games may no longer load.</p>
     <label>Name <input type="text" id="slotName" value="${def}" maxlength="40" style="font:inherit;width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--fg)"></label>
     ${Object.keys(slots).length?`<p class="note" style="margin-top:6px">Existing saves: ${Object.keys(slots).map(n=>`「${n}」`).join(' ')}</p>`:''}
-    <div class="row" style="margin-top:10px;justify-content:flex-end"><button id="svEx">Move to another device</button><button id="svNo">Cancel</button><button id="svGo" class="primary">Save</button></div></div></div>`);
+    <div class="row" style="margin-top:10px;justify-content:flex-end">${cloudAvail()?'<button id="svEx">Google account</button>':''}<button id="svNo">Cancel</button><button id="svGo" class="primary">Save</button></div></div></div>`);
   const el=root.firstElementChild; const inp=el.querySelector('#slotName'); inp.focus(); inp.select();
   el.querySelector('#svNo').addEventListener('click',()=>el.remove());
-  el.querySelector('#svEx').addEventListener('click',()=>{ el.remove(); showExportDialog(); });
+  el.querySelector('#svEx')?.addEventListener('click',()=>{ el.remove(); showCloudDialog(); });
   const go=()=>{ const name=(inp.value||def).trim().slice(0,40); if(!name) return; S.saveName=name; const o=loadSlots(); o[name]={t:Date.now(),turn:S.turn,player:P,land:provsOf(P).length,S:JSON.parse(JSON.stringify(S))};
-    if(storeSlots(o)){ el.remove(); addRumor('idle'); S.rumors.unshift({t:S.turn,f:P,src:L('사관(史官)','Historian (史官)'),text:L(`「${name}」으로 실록에 기록했습니다.`,`Recorded in the Annals as 「${name}」.`)}); render(); } else { el.querySelector('.note').textContent=L('저장에 실패했습니다 (브라우저 저장 공간 부족 또는 차단). 오래된 저장을 지우고 다시 시도하세요.','Save failed (browser storage full or blocked). Delete old saves and try again.'); } };
+    if(storeSlots(o)){ el.remove(); cloudPutSlot(name,o[name]); addRumor('idle'); S.rumors.unshift({t:S.turn,f:P,src:L('사관(史官)','Historian (史官)'),text:L(`「${name}」으로 실록에 기록했습니다.`,`Recorded in the Annals as 「${name}」.`)}); render(); } else { el.querySelector('.note').textContent=L('저장에 실패했습니다 (브라우저 저장 공간 부족 또는 차단). 오래된 저장을 지우고 다시 시도하세요.','Save failed (browser storage full or blocked). Delete old saves and try again.'); } };
   el.querySelector('#svGo').addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
 }
-/* ---------- 다른 기기로 옮기기: 저장 코드(압축+base64)·파일 ---------- */
-async function packSave(obj){ const txt=JSON.stringify(obj); try{ if(window.CompressionStream){ const st=new Blob([txt]).stream().pipeThrough(new CompressionStream('gzip')); const buf=new Uint8Array(await new Response(st).arrayBuffer()); let bin=''; for(let i=0;i<buf.length;i+=8192) bin+=String.fromCharCode.apply(null,buf.subarray(i,i+8192)); return 'DBYG1z:'+btoa(bin); } }catch(e){}
+/* ---------- 저장 압축 (구글 계정 보관용 gzip+base64) ---------- */
+async function packStr(txt){ try{ if(window.CompressionStream){ const st=new Blob([txt]).stream().pipeThrough(new CompressionStream('gzip')); const buf=new Uint8Array(await new Response(st).arrayBuffer()); let bin=''; for(let i=0;i<buf.length;i+=8192) bin+=String.fromCharCode.apply(null,buf.subarray(i,i+8192)); return 'DBYG1z:'+btoa(bin); } }catch(e){}
   return 'DBYG1j:'+btoa(unescape(encodeURIComponent(txt))); }
+function packSave(obj){ return packStr(JSON.stringify(obj)); }
 async function unpackSave(code){ code=(code||'').replace(/\s+/g,''); const m=code.match(/^DBYG1([zj]):(.+)$/); if(!m) throw new Error('bad');
   if(m[1]==='j') return JSON.parse(decodeURIComponent(escape(atob(m[2])))); const bin=atob(m[2]), buf=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) buf[i]=bin.charCodeAt(i);
   const st=new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip')); return JSON.parse(await new Response(st).text()); }
 function applyLoaded(obj,name){ S=JSON.parse(JSON.stringify(obj)); P=S.player||'joseon'; if(name) S.saveName=name;
   UI.sel=homeCap(); UI.specRun=false; UI.pending=null; UI.joint={}; UI.busy=false; UI.over=null; UI.rumorSeen=S.rumorN||0; resetSend(); document.querySelectorAll('.scene,.modal').forEach(e=>e.remove()); homeView(); setSheet('half'); setView('prov'); checkOver(); render(); }
-async function showExportDialog(){ if(!S) return; const root=document.getElementById('modalRoot'); const code=await packSave({v:1,t:Date.now(),name:S.saveName||'',S});
-  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>다른 기기로 옮기기</h2><p class="note">아래 <b>저장 코드</b>를 복사해 다른 기기(휴대폰·PC)에서 <b>불러오기 → 코드·파일로 불러오기</b>에 붙여 넣으면 지금 시점부터 이어집니다. 메신저·메일·메모장 어디에 보관해도 됩니다. 코드가 길면 파일로 내려받아 옮기세요.</p>
-    <textarea id="exCode" readonly style="width:100%;height:120px;font:12px var(--mono);word-break:break-all">${code}</textarea><p class="note" id="exMsg">${Math.round(code.length/1024)}KB</p>
-    <div class="row" style="margin-top:8px;justify-content:flex-end"><button id="exFile">파일로 내려받기</button><button id="exCopy" class="primary">코드 복사</button><button id="exNo">닫기</button></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Move to another device</h2><p class="note">Copy the <b>save code</b> below and paste it on another device (phone or PC) under <b>Load → Load from code or file</b> to carry on from this moment. Keep it anywhere — a messenger, email, a note. If the code is long, download it as a file instead.</p>
-    <textarea id="exCode" readonly style="width:100%;height:120px;font:12px var(--mono);word-break:break-all">${code}</textarea><p class="note" id="exMsg">${Math.round(code.length/1024)} KB</p>
-    <div class="row" style="margin-top:8px;justify-content:flex-end"><button id="exFile">Download file</button><button id="exCopy" class="primary">Copy code</button><button id="exNo">Close</button></div></div></div>`);
-  const el=root.firstElementChild, ta=el.querySelector('#exCode'), msg=el.querySelector('#exMsg');
-  el.querySelector('#exNo').addEventListener('click',()=>el.remove());
-  if(window.claude) el.querySelector('#exFile').hidden=true; // 아티팩트 화면은 파일 내려받기를 막음 — 코드 복사만 (GitHub판은 둘 다)
-  el.querySelector('#exCopy').addEventListener('click',async()=>{ ta.focus(); ta.select(); let ok=false; try{ await navigator.clipboard.writeText(code); ok=true; }catch(e){ try{ ok=document.execCommand('copy'); }catch(e2){} } msg.textContent=ok?L('복사했습니다. 다른 기기에서 붙여 넣으세요.','Copied. Paste it on the other device.'):L('자동 복사가 막혀 있습니다. 선택된 코드를 직접 복사하세요.','Automatic copy is blocked. Copy the selected code by hand.'); });
-  el.querySelector('#exFile').addEventListener('click',()=>{ try{ const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([code],{type:'text/plain'})); a.download=`dongbang-${(S.saveName||PN()+'-'+S.turn).replace(/[^\w가-힣-]+/g,'_')}.dbyg.txt`; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },500); msg.textContent=L('파일을 내려받았습니다.','File downloaded.'); }catch(e){ msg.textContent=L('이 화면에서는 파일 내려받기가 막혀 있습니다. 코드 복사를 쓰세요.','File download is blocked here. Use Copy code instead.'); } }); }
-function showImportDialog(fromStart){ const root=document.getElementById('modalRoot');
-  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>코드·파일로 불러오기</h2><p class="note">다른 기기에서 받은 <b>저장 코드</b>를 붙여 넣거나, 내려받은 저장 파일을 고르세요. 불러오면 지금 하던 게임은 바뀝니다 (먼저 저장해 두세요).</p>
-    <textarea id="imCode" placeholder="DBYG1…" style="width:100%;height:110px;font:12px var(--mono);word-break:break-all"></textarea><input type="file" id="imFile" accept=".txt,.dbyg,text/plain" style="margin-top:6px"><p class="note" id="imMsg"></p>
-    <div class="row" style="margin-top:8px;justify-content:flex-end"><button id="imNo">닫기</button><button id="imGo" class="primary">불러오기</button></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Load from code or file</h2><p class="note">Paste a <b>save code</b> from another device, or choose a downloaded save file. Loading replaces the game you are playing (save it first).</p>
-    <textarea id="imCode" placeholder="DBYG1…" style="width:100%;height:110px;font:12px var(--mono);word-break:break-all"></textarea><input type="file" id="imFile" accept=".txt,.dbyg,text/plain" style="margin-top:6px"><p class="note" id="imMsg"></p>
-    <div class="row" style="margin-top:8px;justify-content:flex-end"><button id="imNo">Close</button><button id="imGo" class="primary">Load</button></div></div></div>`);
-  const el=root.firstElementChild, ta=el.querySelector('#imCode'), msg=el.querySelector('#imMsg');
-  el.querySelector('#imNo').addEventListener('click',()=>{ el.remove(); if(fromStart) showLoadDialog(true); });
-  el.querySelector('#imFile').addEventListener('change',e=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; f.text().then(t=>{ ta.value=t.trim(); msg.textContent=L('파일을 읽었습니다. 불러오기를 누르세요.','File read. Press Load.'); }); });
-  el.querySelector('#imGo').addEventListener('click',async()=>{ let o; try{ o=await unpackSave(ta.value); }catch(e){ msg.style.color='var(--danger)'; msg.textContent=L('저장 코드가 아니거나 잘렸습니다. 처음부터 끝까지 빠짐없이 붙여 넣었는지 확인하세요.','This is not a save code, or it was cut off. Check that you pasted all of it.'); return; }
-    const st=o&&o.S; if(!st||!st.p||!MAP.prov.every(m=>st.p[m.id])){ msg.style.color='var(--danger)'; msg.textContent=L('예전 지도(영지 구성이 다름)로 만든 저장이라 불러올 수 없습니다.','This save was made with an older map (different provinces) and cannot be loaded.'); return; }
-    el.remove(); applyLoaded(st,o.name||''); S.rumors.unshift({t:S.turn,f:P,src:L('사관(史官)','Historian (史官)'),text:L('다른 기기에서 옮겨 온 실록으로 이어 갑니다.','We carry on from Annals brought over from another device.')}); render(); }); }
+
+/* ---------- 구글 계정 저장 (Firebase 로그인 + Firestore) ----------
+   설정: Firebase 콘솔 → 프로젝트 설정 → 내 앱(웹)의 firebaseConfig 객체를 아래 FB_CONFIG_SET 의 null 자리에 붙여 넣음.
+   보관 위치: users/{uid}/saves/auto (자동 저장) · users/{uid}/saves/s_… (이름 붙인 저장). 아티팩트(window.claude)·file:// 에서는 쓰지 않음 */
+const FB_CONFIG_SET = {apiKey:"AIzaSyCB7eOyhdFStXzRA-TxfAaWtPh1eb89B_w",authDomain:"far-east369.firebaseapp.com",projectId:"far-east369",storageBucket:"far-east369.firebasestorage.app",messagingSenderId:"133490736223",appId:"1:133490736223:web:842b24e2efc84a54f1efea"}; /* Firebase 프로젝트 far-east369 */
+const FB_CONFIG = FB_CONFIG_SET || window.DBYG_FB_CONFIG || null;
+const FB_CDN = 'https://cdn.jsdelivr.net/npm/firebase@10.14.1/';
+const CLOUD={on:false,user:null,db:null,auth:null,boot:null,synced:false,syncing:false,pend:null,lastJson:'',lastUp:0,timer:0,err:'',asking:false};
+let AUTO_LAST=null;
+function lsGet(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ if(v==null) localStorage.removeItem(k); else localStorage.setItem(k,String(v)); }catch(e){} }
+function cloudAvail(){ return !!FB_CONFIG && !window.claude && /^https?:$/.test(location.protocol); }
+function cloudBaseKey(){ return 'donghae-cloud-base-'+(CLOUD.user?CLOUD.user.uid:''); }
+function loadJs(src){ return new Promise((ok,no)=>{ const s=document.createElement('script'); s.src=src; s.async=false; s.onload=ok; s.onerror=()=>{ s.remove(); no(new Error('load '+src)); }; document.head.appendChild(s); }); }
+async function loadFb(){ const parts=[['firebase-app-compat.js',()=>window.firebase],['firebase-auth-compat.js',()=>window.firebase&&firebase.auth],['firebase-firestore-compat.js',()=>window.firebase&&firebase.firestore]];
+  for(const [n,has] of parts){ if(has()) continue; try{ await loadJs('fb/'+n); }catch(e){ await loadJs(FB_CDN+n); } } }
+function fbErr(e){ const c=(e&&e.code)||''; if(/network|unavailable|deadline/.test(c)||/load /.test((e&&e.message)||'')) return L('인터넷에 연결되지 않았습니다. 연결되면 다시 시도합니다.','No internet connection. It will retry once you are online.');
+  if(/unauthorized-domain/.test(c)) return L('이 주소가 Firebase 승인 도메인에 없습니다 (Authentication → 설정 → 승인된 도메인).','This address is not an authorized Firebase domain (Authentication → Settings → Authorized domains).');
+  if(/permission-denied/.test(c)) return L('계정 저장소 접근이 거부되었습니다 (Firestore 보안 규칙 확인).','Access to the account storage was denied (check Firestore security rules).');
+  return (c||((e&&e.message)||'error')).replace(/^auth\//,''); }
+function cloudBoot(){ if(!cloudAvail()) return Promise.resolve(false); if(CLOUD.boot) return CLOUD.boot;
+  CLOUD.boot=(async()=>{ try{ await loadFb(); if(!firebase.apps.length) firebase.initializeApp(FB_CONFIG); CLOUD.auth=firebase.auth(); CLOUD.db=firebase.firestore();
+      try{ await CLOUD.auth.getRedirectResult(); }catch(e){ CLOUD.err=fbErr(e); }
+      CLOUD.auth.onAuthStateChanged(u=>{ const was=CLOUD.user?CLOUD.user.uid:null; CLOUD.user=u||null; if(!u){ CLOUD.synced=false; } refreshCloudUi(); if(u&&u.uid!==was){ CLOUD.synced=false; CLOUD.lastJson=''; cloudOnLogin(); } });
+      CLOUD.on=true; return true; }catch(e){ CLOUD.err=fbErr(e); CLOUD.boot=null; refreshCloudUi(); return false; } })();
+  return CLOUD.boot; }
+async function cloudSignIn(){ if(!await cloudBoot()) return false; const pv=new firebase.auth.GoogleAuthProvider(); pv.setCustomParameters({prompt:'select_account'}); lsSet('donghae-cloud','1');
+  try{ await CLOUD.auth.signInWithPopup(pv); CLOUD.err=''; return true; }catch(e){ const c=e.code||'';
+    if(/popup-closed-by-user|cancelled-popup-request/.test(c)) return false;
+    if(/popup-blocked|operation-not-supported|web-storage-unsupported/.test(c)){ try{ await CLOUD.auth.signInWithRedirect(pv); return true; }catch(e2){ CLOUD.err=fbErr(e2); return false; } }
+    CLOUD.err=fbErr(e); return false; } }
+async function cloudSignOut(){ await cloudFlush(); try{ if(CLOUD.auth) await CLOUD.auth.signOut(); }catch(e){} lsSet('donghae-cloud',null); CLOUD.user=null; CLOUD.synced=false; refreshCloudUi(); }
+function userCol(){ return CLOUD.db.collection('users').doc(CLOUD.user.uid).collection('saves'); }
+function slotId(n){ return 's_'+encodeURIComponent(n).replace(/\./g,'%2E'); }
+function landOf(st){ return st&&st.p&&st.player?Object.values(st.p).filter(q=>q.owner===st.player).length:0; }
+function saveSum(o){ const f=o.spec?L('관전','Spectator'):(FDEF[o.player]?FDEF[o.player].name:(o.player||'?')); return L(`${f} · ${o.turn}턴${o.spec?'':` · ${o.land}領`}`,`${f} · Turn ${o.turn}${o.spec?'':` · ${o.land} provinces`}`); }
+function autoMeta(st){ return {turn:st.turn||0,player:st.player||'',spec:!!st.spec,land:landOf(st),name:st.saveName||'',map:MAP.prov.length}; }
+const SLOT_DEL_KEY='donghae-slots-del';
+function loadDel(){ try{ return JSON.parse(lsGet(SLOT_DEL_KEY)||'{}')||{}; }catch(e){ return {}; } }
+/* 자동 저장: render()마다 불림 — 내용이 바뀔 때만 이 기기에 쓰고, 로그인했으면 계정에 올릴 준비 */
+function autoSaveLocal(){ if(!S) return; let j; try{ j=JSON.stringify(S); }catch(e){ return; } if(j===AUTO_LAST) return; AUTO_LAST=j; lsSet('donghae-save-v6',j); cloudDirty(j); }
+function cloudDirty(j){ if(!CLOUD.user) return; if(!CLOUD.synced){ if(!CLOUD.syncing&&!CLOUD.asking) cloudOnLogin(); return; } if(j===CLOUD.lastJson) return; CLOUD.pend=j; clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,Math.max(4000,15000-(Date.now()-CLOUD.lastUp))); }
+async function cloudFlush(){ clearTimeout(CLOUD.timer); const j=CLOUD.pend; if(!CLOUD.user||!CLOUD.synced||!j||j===CLOUD.lastJson) return; CLOUD.pend=null;
+  try{ const ref=userCol().doc('auto'); const d=await ref.get(); const base=+(lsGet(cloudBaseKey())||0);
+    if(d.exists&&d.data().t!==base){ CLOUD.pend=j; CLOUD.synced=false; cloudOnLogin(); return; } /* 다른 기기가 그새 올림 → 덮어쓰지 않고 물어봄 */
+    const st=JSON.parse(j), z=await packStr(j); if(z.length>900000) throw {code:'too-large',message:L('저장이 너무 커서 계정에 올리지 못했습니다.','The save is too large to upload.')};
+    const t=Date.now(); await ref.set({t,z,...autoMeta(st)}); lsSet(cloudBaseKey(),t); CLOUD.lastJson=j; CLOUD.lastUp=t; CLOUD.err=''; }
+  catch(e){ CLOUD.err=fbErr(e); if(!CLOUD.pend) CLOUD.pend=j; clearTimeout(CLOUD.timer); CLOUD.timer=setTimeout(cloudFlush,30000); }
+  refreshCloudUi(); }
+async function cloudPutSlot(n,s){ if(!CLOUD.user) return false; let ok=false; try{ await userCol().doc(slotId(n)).set({name:n,t:s.t,turn:s.turn,player:s.player||'',land:s.land||0,spec:!!(s.S&&s.S.spec),z:await packSave(s.S)}); const o=loadSlots(); if(o[n]&&o[n].t===s.t){ o[n].cs=1; storeSlots(o); } CLOUD.err=''; ok=true; }catch(e){ CLOUD.err=fbErr(e); } refreshCloudUi(); return ok; }
+async function cloudDelSlot(n,wasSynced){ if(CLOUD.user&&CLOUD.synced){ try{ await userCol().doc(slotId(n)).delete(); return; }catch(e){ CLOUD.err=fbErr(e); } } if(wasSynced){ const d=loadDel(); d[n]=Date.now(); lsSet(SLOT_DEL_KEY,JSON.stringify(d)); } }
+/* 이름 붙인 저장 맞추기: 더 최근 것이 이김, 다른 기기에서 지운 것은 여기서도 지움 */
+async function cloudSyncSlots(){ const snap=await userCol().get(); const cloud={}; snap.forEach(d=>{ if(d.id.indexOf('s_')===0){ const c=d.data(); if(c&&c.name) cloud[c.name]=c; } });
+  const loc=loadSlots(), del=loadDel(); let ch=false;
+  for(const n in cloud){ const c=cloud[n];
+    if(del[n]&&del[n]>=c.t&&(!loc[n]||loc[n].t<=c.t)){ try{ await userCol().doc(slotId(n)).delete(); }catch(e){} delete cloud[n]; continue; }
+    if(!loc[n]||loc[n].t<c.t){ try{ const st=await unpackSave(c.z); loc[n]={t:c.t,turn:c.turn,player:c.player,land:c.land,S:st,cs:1}; ch=true; }catch(e){} } }
+  for(const n of Object.keys(loc)){ const s=loc[n];
+    if(!cloud[n]){ if(s.cs){ delete loc[n]; ch=true; } else if(await cloudPutSlot(n,s)){ s.cs=1; ch=true; } }
+    else if(cloud[n].t<s.t){ if(await cloudPutSlot(n,s)){ s.cs=1; ch=true; } }
+    else if(!s.cs){ s.cs=1; ch=true; } }
+  if(ch) storeSlots(loc);
+  lsSet(SLOT_DEL_KEY,null); }
+/* 로그인 직후(또는 충돌 때): 계정의 자동 저장이 이 기기 것과 다르면 고르게 함 */
+async function cloudOnLogin(){ if(!CLOUD.user||CLOUD.syncing||CLOUD.asking) return; CLOUD.syncing=true; refreshCloudUi();
+  try{ const d=await userCol().doc('auto').get(); const base=+(lsGet(cloudBaseKey())||0);
+    try{ await cloudSyncSlots(); }catch(e){ CLOUD.err=fbErr(e); }
+    if(d.exists){ const c=d.data();
+      if(c.t!==base){ let st=null; try{ st=await unpackSave(c.z); }catch(e){}
+        const ok=st&&st.p&&MAP.prov.every(m=>st.p[m.id]); const same=ok&&JSON.stringify(st)===AUTO_LAST;
+        if(ok&&!same){ CLOUD.syncing=false; askCloudPick(c,st); return; }
+        lsSet(cloudBaseKey(),c.t); if(same){ CLOUD.lastJson=AUTO_LAST; } } }
+    CLOUD.synced=true; CLOUD.err=''; if(AUTO_LAST&&lsGet('donghae-save-v6')){ CLOUD.pend=AUTO_LAST; await cloudFlush(); } }
+  catch(e){ CLOUD.err=fbErr(e); }
+  CLOUD.syncing=false; refreshCloudUi(); }
+function askCloudPick(c,st){ CLOUD.asking=true; const root=document.getElementById('modalRoot'); let has=!!lsGet('donghae-save-v6')&&!!AUTO_LAST;
+  let mine=null; try{ if(has){ const m=JSON.parse(AUTO_LAST); if((m.turn||0)<=1&&!m.saveName) has=false; else mine=saveSum(autoMeta(m)); } }catch(e){} /* 1턴 그대로인 새 게임은 진행 중인 게임으로 치지 않음 */
+  const acc=CLOUD.user&&CLOUD.user.email?CLOUD.user.email:'';
+  root.insertAdjacentHTML('beforeend',L(`<div class="modal stay" style="z-index:30"><div class="card"><h2>구글 계정에 저장된 게임</h2><p class="note">${acc}</p>
+    <div class="rf"><b>계정</b><div class="note">${saveSum(c)} · ${fmtDate(c.t)}${c.name?` · 「${c.name}」`:''}</div></div>
+    <div class="rf"><b>이 기기</b><div class="note">${mine||'진행 중인 게임 없음'}</div></div>
+    <p class="note">${has?'이 기기 게임을 유지하면 계정의 자동 저장을 덮어씁니다 (이름 붙인 저장은 그대로).':'새로 시작하면 계정의 자동 저장은 새 게임으로 덮어써집니다 (이름 붙인 저장은 그대로).'}</p>
+    <div class="row" style="margin-top:10px;justify-content:flex-end"><button id="cpMine">${has?'이 기기 게임 유지':'새로 시작'}</button><button id="cpCloud" class="primary">계정 게임으로 이어 하기</button></div></div></div>`,
+   `<div class="modal stay" style="z-index:30"><div class="card"><h2>Game saved in your Google account</h2><p class="note">${acc}</p>
+    <div class="rf"><b>Account</b><div class="note">${saveSum(c)} · ${fmtDate(c.t)}${c.name?` · 「${c.name}」`:''}</div></div>
+    <div class="rf"><b>This device</b><div class="note">${mine||'No game in progress'}</div></div>
+    <p class="note">${has?'Keeping this device\'s game overwrites the autosave in your account (named saves stay).':'If you start fresh, the autosave in your account will be overwritten by the new game (named saves stay).'}</p>
+    <div class="row" style="margin-top:10px;justify-content:flex-end"><button id="cpMine">${has?'Keep this device\'s game':'Start fresh'}</button><button id="cpCloud" class="primary">Continue the account game</button></div></div></div>`));
+  const el=root.lastElementChild;
+  const done=()=>{ CLOUD.asking=false; lsSet(cloudBaseKey(),c.t); CLOUD.synced=true; refreshCloudUi(); };
+  el.querySelector('#cpMine').addEventListener('click',()=>{ el.remove(); done(); if(has){ CLOUD.pend=AUTO_LAST; cloudFlush(); } });
+  el.querySelector('#cpCloud').addEventListener('click',()=>{ root.innerHTML=''; done(); AUTO_LAST=JSON.stringify(st); CLOUD.lastJson=AUTO_LAST; lsSet('donghae-save-v6',AUTO_LAST); applyLoaded(st,c.name||'');
+    S.rumors.unshift({t:S.turn,f:P,src:L('사관(史官)','Historian (史官)'),text:L('구글 계정에 보관된 실록으로 이어 갑니다.','We carry on from the Annals kept in your Google account.')}); render(); });
+}
+function cloudLine(){ if(!cloudAvail()) return ''; if(CLOUD.user){ const st=CLOUD.syncing?L('맞추는 중…','Syncing…'):CLOUD.err?`<span style="color:var(--danger)">${CLOUD.err}</span>`:CLOUD.lastUp?L(`마지막으로 올림 ${fmtDate(CLOUD.lastUp)}`,`Last uploaded ${fmtDate(CLOUD.lastUp)}`):L('계정과 맞춰져 있음','In sync with your account'); return L(`☁ 구글 계정 <b>${CLOUD.user.email||''}</b>에 보관 중 — ${st}`,`☁ Kept in Google account <b>${CLOUD.user.email||''}</b> — ${st}`); }
+  return L('구글 계정으로 로그인하면 자동 저장과 이름 붙인 저장이 계정에도 보관되어, 다른 기기에서 같은 계정으로 이어 할 수 있습니다.','Sign in with Google and your autosave and named saves are also kept in your account, so you can carry on from another device with the same account.')+(CLOUD.err?` <span style="color:var(--danger)">${CLOUD.err}</span>`:''); }
+function refreshCloudUi(){ document.querySelectorAll('.cloudline').forEach(e=>{ e.innerHTML=cloudLine(); }); const b=document.getElementById('mCloud'); if(b) b.textContent=cloudBtnText(); }
+function cloudBtnText(){ return CLOUD.user?L('구글 계정 ✓','Google account ✓'):L('구글 계정으로 로그인','Sign in with Google'); }
+function showCloudDialog(){ if(!cloudAvail()) return; const root=document.getElementById('modalRoot');
+  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>구글 계정</h2><p class="note cloudline">${cloudLine()}</p><p class="note">로그인해 두면 행동할 때마다 자동 저장이 잠시 뒤 계정에 올라가고, 「저장」으로 이름 붙인 게임도 계정에 보관됩니다. 다른 기기에서 같은 계정으로 로그인하면 그 게임으로 이어 갈지 묻습니다.</p>
+    <div class="row" style="margin-top:10px;justify-content:flex-end" id="clBtns"></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Google account</h2><p class="note cloudline">${cloudLine()}</p><p class="note">While signed in, the autosave goes up to your account shortly after each action, and games you name with "Save" are kept there too. Sign in with the same account on another device and you will be asked whether to carry on with that game.</p>
+    <div class="row" style="margin-top:10px;justify-content:flex-end" id="clBtns"></div></div></div>`);
+  const el=root.firstElementChild, bx=el.querySelector('#clBtns');
+  const draw=()=>{ bx.innerHTML=(CLOUD.user?L('<button id="clOut" class="danger">로그아웃</button><button id="clNow">지금 올리기</button>','<button id="clOut" class="danger">Sign out</button><button id="clNow">Upload now</button>'):L('<button id="clIn" class="primary">Google 계정으로 로그인</button>','<button id="clIn" class="primary">Sign in with Google</button>'))+L('<button id="clNo">닫기</button>','<button id="clNo">Close</button>');
+    bx.querySelector('#clNo').addEventListener('click',()=>el.remove());
+    bx.querySelector('#clIn')?.addEventListener('click',async e=>{ e.currentTarget.disabled=true; await cloudSignIn(); draw(); refreshCloudUi(); });
+    bx.querySelector('#clOut')?.addEventListener('click',async()=>{ await cloudSignOut(); draw(); refreshCloudUi(); });
+    bx.querySelector('#clNow')?.addEventListener('click',async()=>{ if(!CLOUD.synced){ await cloudOnLogin(); } else { CLOUD.pend=AUTO_LAST; CLOUD.lastJson=''; await cloudFlush(); } refreshCloudUi(); }); };
+  draw(); }
+function cloudFselBtn(){ return cloudAvail()&&!CLOUD.user?L('<button class="cloudbtn" style="color:#fff;background:transparent;border-color:#c9a85a">구글 계정으로 로그인 (이어 하기)</button>','<button class="cloudbtn" style="color:#fff;background:transparent;border-color:#c9a85a">Sign in with Google (continue)</button>'):''; }
+addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') cloudFlush(); });
 function showLoadDialog(fromStart){
   const root=document.getElementById('modalRoot'); const slots=loadSlots(); const names=Object.keys(slots).sort((a,b)=>slots[b].t-slots[a].t);
   const rows=names.length?names.map(n=>{ const s=slots[n]; return L(`<div class="rf"><div class="row" style="justify-content:space-between"><div><b>${n}</b><div class="note"><span class="owner" style="background:var(--f-${s.player})"></span>${FDEF[s.player]?FDEF[s.player].name:s.player} · ${s.turn}턴 · ${s.land}領 · ${fmtDate(s.t)}</div></div>
     <div class="row"><button class="primary" data-load="${n}">불러오기</button><button class="danger" data-del="${n}">삭제</button></div></div></div>`,`<div class="rf"><div class="row" style="justify-content:space-between"><div><b>${n}</b><div class="note"><span class="owner" style="background:var(--f-${s.player})"></span>${FDEF[s.player]?FDEF[s.player].name:s.player} · Turn ${s.turn} · ${s.land} provinces · ${fmtDate(s.t)}</div></div>
     <div class="row"><button class="primary" data-load="${n}">Load</button><button class="danger" data-del="${n}">Delete</button></div></div></div>`); }).join(''):L('<p class="note">저장된 게임이 없습니다.</p>','<p class="note">No saved games.</p>');
-  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>저장된 게임</h2>${rows}<p class="note" style="color:var(--danger);margin-top:8px">⚠ 지도·영지 구성이 바뀌는 큰 업데이트 전에 만든 저장은 불러오지 못할 수 있습니다.</p><div class="row" style="margin-top:10px;justify-content:flex-end"><button id="ldIm">코드·파일로 불러오기</button><button id="ldNo">${fromStart?'세력 선택으로':'닫기'}</button></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Saved games</h2>${rows}<p class="note" style="color:var(--danger);margin-top:8px">⚠ Saves made before a major update that changed the map or provinces may not load.</p><div class="row" style="margin-top:10px;justify-content:flex-end"><button id="ldIm">Load from code or file</button><button id="ldNo">${fromStart?'Back to faction select':'Close'}</button></div></div></div>`);
+  root.innerHTML=L(`<div class="modal stay"><div class="card"><h2>저장된 게임</h2>${cloudAvail()?`<p class="note cloudline">${cloudLine()}</p>`:''}${rows}<p class="note" style="color:var(--danger);margin-top:8px">⚠ 지도·영지 구성이 바뀌는 큰 업데이트 전에 만든 저장은 불러오지 못할 수 있습니다.</p><div class="row" style="margin-top:10px;justify-content:flex-end">${cloudAvail()?'<button id="ldCl">구글 계정</button>':''}<button id="ldNo">${fromStart?'세력 선택으로':'닫기'}</button></div></div></div>`,`<div class="modal stay"><div class="card"><h2>Saved games</h2>${cloudAvail()?`<p class="note cloudline">${cloudLine()}</p>`:''}${rows}<p class="note" style="color:var(--danger);margin-top:8px">⚠ Saves made before a major update that changed the map or provinces may not load.</p><div class="row" style="margin-top:10px;justify-content:flex-end">${cloudAvail()?'<button id="ldCl">Google account</button>':''}<button id="ldNo">${fromStart?'Back to faction select':'Close'}</button></div></div></div>`);
   const el=root.firstElementChild;
   el.querySelector('#ldNo').addEventListener('click',()=>{ el.remove(); if(fromStart) showFactionSelect(false); });
-  el.querySelector('#ldIm').addEventListener('click',()=>{ el.remove(); showImportDialog(fromStart); });
-  el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{ const o=loadSlots(); delete o[b.dataset.del]; storeSlots(o); showLoadDialog(fromStart); }));
+  el.querySelector('#ldCl')?.addEventListener('click',()=>{ el.remove(); showCloudDialog(); });
+  el.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{ const o=loadSlots(), n=b.dataset.del, cs=!!(o[n]&&o[n].cs); delete o[n]; storeSlots(o); cloudDelSlot(n,cs); showLoadDialog(fromStart); }));
   el.querySelectorAll('[data-load]').forEach(b=>b.addEventListener('click',()=>{ const s=loadSlots()[b.dataset.load]; if(!s) return; if(!MAP.prov.every(m=>s.S&&s.S.p&&s.S.p[m.id])){ el.querySelector('.note,.rf').insertAdjacentHTML('beforebegin',L('<p class="note" style="color:var(--danger)">이 저장은 예전 지도(영지 구성이 다름)로 만든 것이라 불러올 수 없습니다.</p>','<p class="note" style="color:var(--danger)">This save was made with an older map (different provinces) and cannot be loaded.</p>')); return; } el.remove();
     S=JSON.parse(JSON.stringify(s.S)); P=S.player||s.player||'joseon'; S.saveName=b.dataset.load;
     UI.sel=homeCap(); UI.specRun=false; UI.pending=null; UI.joint={}; UI.busy=false; UI.over=null; UI.rumorSeen=S.rumorN||0; resetSend(); document.querySelectorAll('.scene').forEach(e=>e.remove()); homeView(); setSheet('half'); setView('prov'); checkOver(); render(); }));
@@ -1626,12 +1739,13 @@ function showFactionSelect(cancelable){
     <button data-f="${f}">Start as ${fname(f)}</button></div>`); }).join('')+L(`<div class="fcard" style="--fc:#6b6f76"><div class="nm"><b>선택 안 함</b><span>天下爭鬪</span></div><p>다섯 나라 모두를 AI가 다스리고, 전하께서는 천하의 다툼을 지켜보십니다. 누가 동방을 차지할지 턴마다 지도와 여론 및 첩보로 살펴보소서.</p>
     <div class="kv"><b>관전</b> 언제든 일시정지·계속할 수 있고, 「관전 종료」로 세력 선택 화면으로 돌아옵니다</div><button data-spec="1">천하쟁투 관전</button></div>`,`<div class="fcard" style="--fc:#6b6f76"><div class="nm"><b>No faction</b><span>天下爭鬪</span></div><p>The AI rules all five realms while Your Majesty watches the struggle for the realm. Follow who will claim the East, turn by turn, on the map and in Rumors & Intel.</p>
     <div class="kv"><b>Spectate</b> Pause or resume at any time; "End spectating" returns you to the faction select screen</div><button data-spec="1">Spectate Struggle for the Realm</button></div>`);
-  root.innerHTML=L(`<div class="fsel"><div class="wrap"><h2>세력 선택</h2><p class="lead">1592년, 임진왜란 전야 — 청이 중국 통일을 마무리하는 1683년까지 동방의 패권을 겨룹니다</p><div class="fgrid">${cards}</div><div class="row" style="justify-content:center;gap:8px;margin-top:16px">${Object.keys(loadSlots()).length?'<button class="loadbtn" style="color:#fff;background:transparent;border-color:#c9a85a">저장된 게임 불러오기</button>':''}${cancelable?'<button class="cancel" style="margin:0">취소 — 지금 게임 계속</button>':''}</div></div></div>`,`<div class="fsel"><div class="wrap"><h2>Choose a faction</h2><p class="lead">1592, on the eve of the Imjin War — contest the mastery of the East until 1683, when the Qing complete their conquest of China</p><div class="fgrid">${cards}</div><div class="row" style="justify-content:center;gap:8px;margin-top:16px">${Object.keys(loadSlots()).length?'<button class="loadbtn" style="color:#fff;background:transparent;border-color:#c9a85a">Load saved game</button>':''}${cancelable?'<button class="cancel" style="margin:0">Cancel — continue current game</button>':''}</div></div></div>`);
+  root.innerHTML=L(`<div class="fsel"><div class="wrap"><h2>세력 선택</h2><p class="lead">1592년, 임진왜란 전야 — 청이 중국 통일을 마무리하는 1683년까지 동방의 패권을 겨룹니다</p><div class="fgrid">${cards}</div><div class="row" style="justify-content:center;gap:8px;margin-top:16px">${Object.keys(loadSlots()).length?'<button class="loadbtn" style="color:#fff;background:transparent;border-color:#c9a85a">저장된 게임 불러오기</button>':''}${cloudFselBtn()}${cancelable?'<button class="cancel" style="margin:0">취소 — 지금 게임 계속</button>':''}</div></div></div>`,`<div class="fsel"><div class="wrap"><h2>Choose a faction</h2><p class="lead">1592, on the eve of the Imjin War — contest the mastery of the East until 1683, when the Qing complete their conquest of China</p><div class="fgrid">${cards}</div><div class="row" style="justify-content:center;gap:8px;margin-top:16px">${Object.keys(loadSlots()).length?'<button class="loadbtn" style="color:#fff;background:transparent;border-color:#c9a85a">Load saved game</button>':''}${cloudFselBtn()}${cancelable?'<button class="cancel" style="margin:0">Cancel — continue current game</button>':''}</div></div></div>`);
   root.querySelector('.fsel h2')?.insertAdjacentHTML('afterend',`<div class="row" style="justify-content:center;margin:2px 0 10px">${langBtn().replace('class="langbtn"','class="langbtn" style="color:#fff;background:transparent;border-color:#c9a85a"')}</div>`); root.querySelector('.langbtn')?.addEventListener('click',e=>setLang(e.currentTarget.dataset.lang));
   root.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>{ root.innerHTML=''; newGame(b.dataset.f); setTimeout(runTutorial,350); }));
   root.querySelector('[data-spec]')?.addEventListener('click',()=>{ root.innerHTML=''; startSpectate(); });
   root.querySelector('.cancel')?.addEventListener('click',()=>{ root.innerHTML=''; });
   root.querySelector('.loadbtn')?.addEventListener('click',()=>showLoadDialog(!cancelable));
+  root.querySelector('.cloudbtn')?.addEventListener('click',async e=>{ e.currentTarget.disabled=true; await cloudSignIn(); const b=root.querySelector('.cloudbtn'); if(b){ if(CLOUD.user) b.remove(); else { b.disabled=false; if(CLOUD.err) b.textContent=CLOUD.err; } } });
 }
 
 /* ---------- 튜토리얼: an animated walkthrough of the opening moves — red rings on what to press, arrows to what it changes ---------- */
@@ -1974,6 +2088,7 @@ function confirmDispatch(){
     else if(r.result==='sunk') showScene('lose',L('함대 전멸','Fleet destroyed'),L(`${r.to.name} 앞바다에서 패배 · 육군 절반 수장`,`Defeated off ${r.to.name} · half the land troops drowned`),6300,after);
     else if(r.result==='occupy') showScene('win',L(`${r.to.name} 접수`,`${r.to.name} taken`),L('저항 없이 영지를 차지했습니다','Province taken without resistance'),6300,()=>playFalls());
   });
+  if(!hostile&&!anySea&&to.owner===P) showScene('march',L(`行軍 — ${to.name}`,`行軍 — March to ${to.name}`),cons.map(c=>`${c.from.name} ${armyIcons(c.u)}`).join(' + ')+L(' 이동',' on the move'),2200,go); else
   if(hostile&&!anySea) showScene('attack',L(`出陣 — ${to.name} 공격`,`出陣 — Attack on ${to.name}`),cons.map(c=>`${c.from.name} ${armyIcons(c.u)}`).join(' + ')+L(' 진격',' advance'),3000,go); else go();
 }
 
@@ -2236,10 +2351,97 @@ function fallArt(col){ // dusk after the fall: a burning citadel on the ridge, a
    ${ash}
    </g><rect width="${W}" height="${H}" fill="url(#vig)"/><rect width="${W}" height="${H}" filter="url(#grain)" opacity=".9"/></svg>`;
 }
-function showScene(kind,title,sub,ms=6300,cb,colOpt){
+function runner(x,y,s,i){ // 다급히 달아나는 백성 (오른쪽으로), 발은 local y=60
+  const sw=(i*.17)%.5;
+  return `<g transform="translate(${x},${y}) scale(${s})"><g class="runner" style="animation-delay:${sw}s">
+   <path d="M2,0 Q10,8 8,22 L10,40 L22,58 L16,60 L4,44 L-6,60 L-12,58 L-2,40 L-4,22 Q-6,8 2,0 Z" fill="#2a2420"/>
+   <circle cx="6" cy="-8" r="6.5" fill="#2a2420"/>${i%3===0?`<path d="M-8,4 Q-22,-2 -26,12 L-10,16 Z" fill="#3a3028"/>`:i%3===1?`<path d="M-4,10 L-20,0" stroke="#2a2420" stroke-width="3" stroke-linecap="round"/><circle cx="-22" cy="-2" r="4" fill="#2a2420"/>`:`<path d="M10,8 L26,-6" stroke="#2a2420" stroke-width="3" stroke-linecap="round"/>`}
+  </g></g>`; }
+function invadeArt(col,ecol){ // 적의 대군이 먼 능선에서 몰려오고, 백성들이 짐을 지고 달아남
+  const W=640,H=360;
+  const horde=Array.from({length:26},(_,i)=>rider(20+i*24+(i%2?8:0),132+(i%4)*3,.17,{delay:(i*.05)%.46,light:true,plume:ecol})).join('');
+  const horde2=Array.from({length:12},(_,i)=>rider(40+i*52,150+(i%2)*5,.28,{delay:(i*.09)%.46,banner:i%3===0?ecol:null,plume:ecol})).join('');
+  const people=Array.from({length:11},(_,i)=>runner(30+i*56+(i%2?18:0),268+(i%3)*14,1+(i%3)*.18,i)).join('');
+  const house=(x,y)=>`<rect x="${x}" y="${y}" width="70" height="40" fill="#3a2e26"/><path d="M${x-10},${y} L${x+35},${y-26} L${x+80},${y} Z" fill="#2a221d"/>`;
+  return `<svg viewBox="0 0 ${W} ${H}">${DEFS}<linearGradient id="skyI" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1e2a"/><stop offset=".6" stop-color="#8a4a34"/><stop offset="1" stop-color="#d98a4a"/></linearGradient><g class="cam">
+   <rect width="${W}" height="${H}" fill="url(#skyI)"/>
+   <path d="M0,170 Q140,140 300,158 T640,150 L640,200 L0,200 Z" fill="#4a3030" opacity=".85"/>
+   ${dustCloud(320,150,360,30,'#c99a6a',.75,0)}
+   <g filter="url(#blur2)" opacity=".85">${horde}</g>${horde2}
+   ${dustCloud(200,182,220,26,'#b8875a',.7,.8)}${dustCloud(480,186,220,26,'#b8875a',.7,1.4)}
+   <rect x="0" y="200" width="${W}" height="${H-200}" fill="#4a3a2c"/>
+   ${house(40,206)}${house(520,210)}<circle class="smoke" cx="560" cy="196" r="22" fill="#2c2a2a" opacity=".6" filter="url(#blur6)"/>
+   <path d="M0,236 Q200,228 400,240 T640,236 L640,${H} L0,${H} Z" fill="#5a4634"/>
+   <g class="flee">${people}</g>
+   ${dustCloud(320,350,420,30,'#3a2a20',.7,0)}
+   </g><rect width="${W}" height="${H}" fill="url(#vig)"/><rect width="${W}" height="${H}" filter="url(#grain)" opacity=".9"/></svg>`; }
+function sideFoot(x,y,s,col,i,fight){ // 옆모습 보병 (오른쪽을 봄), 발은 local y=0 · fight: 창을 앞으로 내지름
+  const d=`style="animation-delay:${-((i*.23)%1.2)}s"`; const arm=fight?`<g class="thrust" ${d}><line x1="-2" y1="-40" x2="14" y2="-36" stroke="#3a2f28" stroke-width="5" stroke-linecap="round"/><line x1="-30" y1="-34" x2="52" y2="-42" stroke="#2a2420" stroke-width="2.6"/><path d="M52,-42 l12,-1 l-12,-5 Z" fill="#c8c8c8"/></g>`
+    :`<line x1="0" y1="-40" x2="4" y2="-22" stroke="#3a2f28" stroke-width="5" stroke-linecap="round"/><line x1="-14" y1="-8" x2="14" y2="-96" stroke="#2a2420" stroke-width="2.4"/><path d="M14,-96 l-1,-12 l6,10 Z" fill="#c8c8c8"/>`;
+  return `<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="0" cy="0" rx="16" ry="3" fill="rgba(20,12,6,.35)"/>
+   <g class="${fight?'legF':'legA'}" ${d}><path d="M-3,-26 L-8,0 L-1,0 L3,-24 Z" fill="#2a221c"/></g><g class="${fight?'legF2':'legB'}" ${d}><path d="M0,-26 L6,0 L13,0 L5,-24 Z" fill="#3a2f28"/></g>
+   <path d="M-9,-50 L9,-50 L10,-24 L-10,-24 Z" fill="${col}"/><rect x="-10" y="-34" width="20" height="4" fill="#5c4a2a"/>
+   <circle cx="1" cy="-58" r="7.5" fill="#c9a386"/><path d="M-8,-60 Q1,-74 10,-60 Z" fill="#4a443f"/><rect x="-9" y="-61" width="19" height="3" fill="#6e6862"/>
+   ${arm}</g>`; }
+function sideHorse(x,y,s,col,i,fight,banner){ // 옆모습 기병 (오른쪽을 봄)
+  const d=`style="animation-delay:${-((i*.19)%1)}s"`;
+  return `<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="0" cy="0" rx="36" ry="4" fill="rgba(20,12,6,.35)"/>
+   <g class="hlegA" ${d}><path d="M-22,-30 L-26,0 L-20,0 L-16,-30 Z" fill="#3a2a1e"/><path d="M16,-30 L20,0 L26,0 L22,-30 Z" fill="#3a2a1e"/></g>
+   <g class="hlegB" ${d}><path d="M-16,-30 L-12,0 L-6,0 L-10,-30 Z" fill="#4a3624"/><path d="M10,-30 L6,0 L12,0 L16,-30 Z" fill="#4a3624"/></g>
+   <g class="hbody" ${d}><ellipse cx="0" cy="-36" rx="30" ry="12" fill="#5a4030"/><path d="M22,-42 L34,-66 L46,-62 L42,-54 L30,-36 Z" fill="#5a4030"/><path d="M-30,-40 Q-42,-30 -38,-16" stroke="#2a1d12" stroke-width="4" fill="none"/>
+   <path d="M-12,-48 L10,-48 L8,-38 L-10,-38 Z" fill="${col}"/>
+   <path d="M-6,-48 L6,-48 L5,-74 L-5,-74 Z" fill="${col}"/><circle cx="0" cy="-82" r="7" fill="#c9a386"/><path d="M-8,-84 Q0,-98 9,-84 Z" fill="#4a443f"/>
+   ${fight?`<g class="thrust" ${d}><line x1="-26" y1="-64" x2="60" y2="-70" stroke="#2a2420" stroke-width="2.6"/><path d="M60,-70 l12,-1 l-12,-5 Z" fill="#c8c8c8"/></g>`:`<line x1="-4" y1="-50" x2="10" y2="-130" stroke="#2a2420" stroke-width="2.4"/><path d="M10,-130 l-1,-12 l6,10 Z" fill="#c8c8c8"/>`}
+   ${banner?`<line x1="-14" y1="-50" x2="-14" y2="-150" stroke="#2a2420" stroke-width="2.4"/><path class="banner" d="M-14,-150 L-14,-112 Q-46,-130 -70,-118 Q-44,-140 -14,-150 Z" fill="${col}"/>`:''}</g></g>`; }
+function marchArt(col){ // 묵묵한 행군: 보병·기병·깃발이 왼쪽에서 오른쪽으로 천천히 걸어감
+  const W=640,H=360; let back='',front='';
+  for(let i=0;i<9;i++) back+=(i%3===1)?sideHorse(i*84-60,236,.62,col,i,false,i===4):sideFoot(i*84-60,236,.66,col,i,false);
+  for(let i=0;i<8;i++) front+=(i===3)?sideHorse(i*96-40,318,.95,col,i+1,false,true):sideFoot(i*96-40,318,1,col,i+3,false);
+  return `<svg viewBox="0 0 ${W} ${H}">${DEFS}<g class="cam">
+   <rect width="${W}" height="${H}" fill="url(#skyA)"/>
+   <path d="M0,150 Q160,128 320,142 T640,136 L640,200 L0,200 Z" fill="#7d8a6a" opacity=".6" filter="url(#blur6)"/>
+   <rect x="0" y="180" width="${W}" height="${H-180}" fill="url(#gndA)"/>
+   <rect x="0" y="222" width="${W}" height="108" fill="#c9b48a" opacity=".55"/>
+   <g class="marchR">${back}</g><g class="marchR">${front}</g>
+   ${dustCloud(320,340,420,22,'#b8975f',.45,.3)}
+   </g><rect width="${W}" height="${H}" fill="url(#vig)"/><rect width="${W}" height="${H}" filter="url(#grain)" opacity=".8"/></svg>`; }
+function warArt(ca,cb){ // 타국 간 전쟁: 좌우 두 군대가 마주 보고 부딪침, 화살이 오가고 흙먼지·연기
+  const W=640,H=360;
+  const army=(c,flip)=>{ let g=''; [[226,.62,5,58],[262,.8,4,70],[312,1,3,86]].forEach(([y,sc,n,gap],r)=>{ for(let i=0;i<n;i++){ const x=40+i*gap+r*14; g+=((i+r)%3===0)?sideHorse(x,y,sc,c,i+r*3,true,i===0&&r===1):sideFoot(x,y,sc,c,i+r*3,true); } });
+    return `<g transform="${flip?`translate(${W},0) scale(-1,1)`:''}"><g class="clash" style="animation-delay:${flip?'-.4s':'0s'}">${g}</g></g>`; };
+  const arrows=(dir)=>Array.from({length:9},(_,i)=>{ const x=dir>0?60+(i*41)%200:580-(i*41)%200, y=110+(i*17)%70; return `<g class="${dir>0?'arrowR':'arrowL'}" style="animation-delay:${-((i*.21)%1.4)}s"><line x1="${x}" y1="${y}" x2="${x+14*dir}" y2="${y-4}" stroke="#2a2018" stroke-width="1.6"/></g>`; }).join('');
+  return `<svg viewBox="0 0 ${W} ${H}">${DEFS}<g class="cam">
+   <rect width="${W}" height="${H}" fill="url(#skyA)"/>
+   <path d="M0,170 Q120,150 240,166 T480,160 T640,168 L640,230 L0,230 Z" fill="#8f7d5e" opacity=".55" filter="url(#blur6)"/>
+   <rect x="0" y="200" width="${W}" height="${H-200}" fill="url(#gndA)"/>
+   ${arrows(1)}${arrows(-1)}
+   ${army(ca,false)}${army(cb,true)}
+   ${dustCloud(320,270,110,60,'#c9ad84',.5,0)}${dustCloud(320,320,150,40,'#bfa076',.5,.7)}
+   <circle class="smoke" cx="280" cy="210" r="20" fill="#5a4a3a" opacity=".5" filter="url(#blur6)"/><circle class="smoke" cx="360" cy="214" r="24" fill="#5a4a3a" opacity=".5" filter="url(#blur6)" style="animation-delay:1.2s"/>
+   ${dustCloud(320,352,420,30,'#b8975f',.7,.2)}
+   </g><rect width="${W}" height="${H}" fill="url(#vig)"/><rect width="${W}" height="${H}" filter="url(#grain)" opacity=".9"/></svg>`; }
+function shipBurnScene(n,to){ return scene('shipburn',L(`배 ${n}척 소실`,`${n} ships lost`),L(`${to.name} 항구의 배를 적군이 쓰지 못하게 불태워 수장시켰습니다`,`The ships in ${to.name}'s harbour were burned and scuttled so the enemy could not use them`),2000); }
+function shipburnArt(col){ // 항구의 배가 불타며 가라앉음 (2초)
+  const W=640,H=360;
+  const ship=(x,y,s,i)=>`<g transform="translate(${x},${y}) scale(${s})"><g class="sink" style="animation-delay:${i*.25}s">
+    <path d="M-70,0 L70,0 L52,26 L-52,26 Z" fill="#3a2418"/><rect x="-60" y="-8" width="120" height="10" fill="#4a3020"/>
+    <line x1="-6" y1="-6" x2="-2" y2="-110" stroke="#2a1a10" stroke-width="4"/><path d="M-2,-104 L46,-96 L40,-30 L-2,-34 Z" fill="${col}" opacity=".75"/><path d="M8,-90 L30,-88 L26,-50 L8,-52 Z" fill="#1a0e08" opacity=".7"/>
+    ${[[-40,-12,10,16],[2,-30,12,22],[38,-12,9,15],[22,-70,8,14]].map(([fx,fy,rx,ry],k)=>`<g class="flame" style="animation-delay:${(k*.11)%.38}s"><ellipse cx="${fx}" cy="${fy}" rx="${rx}" ry="${ry}" fill="#ff8a2a" opacity=".9" filter="url(#blur6)"/><ellipse cx="${fx}" cy="${fy+6}" rx="${rx*.5}" ry="${ry*.55}" fill="#ffd36b"/></g>`).join('')}
+  </g></g>`;
+  const embers=Array.from({length:18},(_,i)=>`<circle class="ember" cx="${120+((i*61)%400)}" cy="${200+(i%4)*8}" r="${1.2+(i%3)*.6}" fill="${i%2?'#ffb347':'#ff6a2a'}" style="animation-delay:${(i*.29)%3.4}s"/>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}">${DEFS}<linearGradient id="skyB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120c18"/><stop offset=".7" stop-color="#5a2430"/><stop offset="1" stop-color="#b8502c"/></linearGradient><g class="cam">
+   <rect width="${W}" height="${H}" fill="url(#skyB)"/>
+   ${[180,330,470].map((x,i)=>`<circle class="smoke" cx="${x}" cy="150" r="34" fill="#1a1618" opacity=".75" filter="url(#blur14)" style="animation-delay:${i*.6}s"/>`).join('')}
+   <path d="M0,206 L640,206 L640,${H} L0,${H} Z" fill="#1c2430"/>
+   ${ship(170,222,.9,0)}${ship(340,226,1.1,1)}${ship(500,220,.85,2)}
+   <rect x="0" y="244" width="${W}" height="${H-244}" fill="#18202c" opacity=".9"/>
+   <ellipse cx="320" cy="240" rx="300" ry="20" fill="#ff7a2a" opacity=".25" filter="url(#blur14)"/>
+   ${embers}
+   </g><rect width="${W}" height="${H}" fill="url(#vig)"/><rect width="${W}" height="${H}" filter="url(#grain)" opacity=".9"/></svg>`; }
+function showScene(kind,title,sub,ms=6300,cb,colOpt,colOpt2){
   const wrap=document.getElementById('mapWrap'); wrap.querySelectorAll('.scene').forEach(e=>e.remove());
-  const col=colOpt||FCOL[P]||'#3C6DB8'; const art=kind==='attack'?attackArt(col):kind==='win'?winArt(col):kind==='fall'?fallArt(col):loseArt(col);
-  if(kind==='win') playSfx('cheer'); else if(kind==='lose') playSfx('sad'); else if(kind==='fall') playSfx('dirge'); else if(kind==='attack') playSfx('cry');
+  const col=colOpt||FCOL[P]||'#3C6DB8'; const art=kind==='attack'?attackArt(col):kind==='invade'?invadeArt(FCOL[P]||col,col):kind==='march'?marchArt(col):kind==='war'?warArt(col,colOpt2||'#888'):kind==='shipburn'?shipburnArt(col):kind==='win'?winArt(col):kind==='fall'?fallArt(col):loseArt(col);
+  if(kind==='win') playSfx('cheer'); else if(kind==='lose') playSfx('sad'); else if(kind==='fall') playSfx('dirge'); else if(kind==='attack'||kind==='invade') playSfx('cry'); else if(kind==='march') playSfx('march'); else if(kind==='war') playSfx('attack'); else if(kind==='shipburn') playSfx('dirge');
   const d=document.createElement('div'); d.className='scene '+kind; d.style.setProperty('--out',(ms-850)+'ms'); d.style.setProperty('--cam',(ms-300)+'ms');
   d.innerHTML=`<div class="inner">${art}<h2>${title}</h2><div class="sub">${sub}</div></div>`;
   wrap.appendChild(d); setTimeout(()=>{d.remove(); if(cb) cb();},ms);
@@ -2409,15 +2611,16 @@ function showMenu(){
   const rows=[...(S.spec?[]:[P]),...AIS_(),'neutral'].map(f=>L(`<tr class="${S.f[f].alive?'':'dead'}"><td style="text-align:left"><span class="owner" style="background:var(--f-${f})"></span>${fname(f)}${S.f[f].alive?'':' <span class="note">(멸망)</span>'}</td><td class="num">${provsOf(f).length}</td><td class="num">${unitsOf(f)}</td><td class="num">${f==='neutral'?'—':Math.round(income(f))}</td></tr>`,`<tr class="${S.f[f].alive?'':'dead'}"><td style="text-align:left"><span class="owner" style="background:var(--f-${f})"></span>${fname(f)}${S.f[f].alive?'':' <span class="note">(destroyed)</span>'}</td><td class="num">${provsOf(f).length}</td><td class="num">${unitsOf(f)}</td><td class="num">${f==='neutral'?'—':Math.round(income(f))}</td></tr>`)).join('');
   root.innerHTML=L(`<div class="modal stay menu"><div class="card"><h2>동방열국지</h2><p class="note">${S.turn}턴 · ${PN()}${S.saveName?` · 「${S.saveName}」`:''}</p>
     <table style="margin:4px 0 8px"><tr><th style="text-align:left">세력</th><th>領</th><th>部</th><th>수입</th></tr>${rows}</table>
-    <button id="mSave">저장</button><button id="mLoad">불러오기</button><button id="mRules">규칙과 병종표</button><button id="mTut">튜토리얼 (사용법 안내)</button><button id="mSfx">효과음 ${SFX.on?'켜짐 — 끄기':'꺼짐 — 켜기'}</button><button id="mNew" class="danger">새 게임 (세력 선택)</button><button id="mClose">닫기</button></div></div>`,`<div class="modal stay menu"><div class="card"><h2>Annals of the Eastern Realms</h2><p class="note">Turn ${S.turn} · ${PN()}${S.saveName?` · 「${S.saveName}」`:''}</p>
+    <button id="mSave">저장</button><button id="mLoad">불러오기</button>${cloudAvail()?`<button id="mCloud">${cloudBtnText()}</button>`:''}<button id="mRules">규칙과 병종표</button><button id="mTut">튜토리얼 (사용법 안내)</button><button id="mSfx">효과음 ${SFX.on?'켜짐 — 끄기':'꺼짐 — 켜기'}</button><button id="mNew" class="danger">새 게임 (세력 선택)</button><button id="mClose">닫기</button></div></div>`,`<div class="modal stay menu"><div class="card"><h2>Annals of the Eastern Realms</h2><p class="note">Turn ${S.turn} · ${PN()}${S.saveName?` · 「${S.saveName}」`:''}</p>
     <table style="margin:4px 0 8px"><tr><th style="text-align:left">Faction</th><th>Provinces</th><th>Units</th><th>Income</th></tr>${rows}</table>
-    <button id="mSave">Save</button><button id="mLoad">Load</button><button id="mRules">Rules and unit chart</button><button id="mTut">Tutorial (how to play)</button><button id="mSfx">Sound effects: ${SFX.on?'on — turn off':'off — turn on'}</button><button id="mNew" class="danger">New game (choose faction)</button><button id="mClose">Close</button></div></div>`);
+    <button id="mSave">Save</button><button id="mLoad">Load</button>${cloudAvail()?`<button id="mCloud">${cloudBtnText()}</button>`:''}<button id="mRules">Rules and unit chart</button><button id="mTut">Tutorial (how to play)</button><button id="mSfx">Sound effects: ${SFX.on?'on — turn off':'off — turn on'}</button><button id="mNew" class="danger">New game (choose faction)</button><button id="mClose">Close</button></div></div>`);
   const el=root.firstElementChild; const close=()=>el.remove();
   el.addEventListener('click',e=>{ if(e.target===el) close(); });
   el.querySelector('#mClose').addEventListener('click',close);
   el.querySelector('#mSave').addEventListener('click',()=>{ close(); showSaveDialog(); });
   el.querySelector('#mLoad').addEventListener('click',()=>{ close(); showLoadDialog(false); });
   el.querySelector('#mRules').addEventListener('click',()=>{ close(); showRules(); });
+  el.querySelector('#mCloud')?.addEventListener('click',()=>{ close(); showCloudDialog(); });
   el.querySelector('#mTut').addEventListener('click',()=>{ close(); runTutorial(); });
   el.querySelector('#mNew').addEventListener('click',()=>{ close(); showFactionSelect(true); });
   el.querySelector('#mClose').insertAdjacentHTML('beforebegin',langBtn()); el.querySelector('.langbtn').addEventListener('click',e=>setLang(e.currentTarget.dataset.lang)); // 언어 / Language
@@ -2535,12 +2738,12 @@ function showReport(r,ms=6500){ // transient battle report: fades after a few se
   el.addEventListener('click',close); setTimeout(close,ms);
 }
 function fixArmies(){ if(S&&S.p) for(const k in S.p){ const a=S.p[k].army; if(a&&a.cat==null) a.cat=0; const m=GEO[k]; if(m&&S.p[k].name!==m.name) S.p[k].name=m.name; } if(S&&S.f) for(const k in S.f){ if(FDEF[k]&&S.f[k].name!==FDEF[k].name) S.f[k].name=FDEF[k].name; } } // 화포병이 없던 예전 저장본 · 언어를 바꾸면 영지·세력 이름도 따라감 // 화포병이 없던 예전 저장본
-function render(){ fixArmies(); renderChips(); renderTurn(); renderSel(); renderMap(); renderRumors(); renderSheet(); try{localStorage.setItem('donghae-save-v6',JSON.stringify(S));}catch(e){} }
+function render(){ fixArmies(); renderChips(); renderTurn(); renderSel(); renderMap(); renderRumors(); renderSheet(); autoSaveLocal(); }
 
 function start(data){
-  fitVB();
+  fitVB(); if(lsGet('donghae-cloud')==='1') setTimeout(cloudBoot,0);
   if(data&&data.S){ S=data.S; P=S.player||'joseon'; Object.assign(UI,data.UI||{}); homeView(); setSheet(UI.sheet||'half'); setView(UI.view||'prov'); }
-  else { let saved=null; try{saved=JSON.parse(localStorage.getItem('donghae-save-v6'));}catch(e){}
+  else { let saved=null; try{ AUTO_LAST=localStorage.getItem('donghae-save-v6'); saved=JSON.parse(AUTO_LAST);}catch(e){}
     if(saved&&saved.p&&MAP.prov.every(m=>saved.p[m.id])){ S=saved; UI.busy=false; if(!S.rumors) S.rumors=[]; if(S.morale==null) S.morale=55;
       Object.values(S.p).forEach(q=>{ if(q.morale==null) q.morale=MORALE_BASE; if(q.army&&q.army.cat==null) q.army.cat=0; });
       if(!S.f.ming){ S.f.ming={...FDEF.ming,gold:400,alive:true}; START.ming.p.forEach(id=>{ const q=S.p[id]; if(q.owner==='neutral'){ q.owner='ming'; setupStart(q,'ming',id===START.ming.cap); } }); if(!provsOf('ming').length) S.f.ming.alive=false; }
@@ -2631,7 +2834,7 @@ const STANCES = {
 const CAVS = {
   flank:{ name:tr('우회 기습','Flank Raid'), hn:'迂廻', plus:tr('접전이 붙으면 측면을 돌아 궁병·후방을 침','Once the lines clash, rides round the flank to hit archers and the rear'), minus:tr('예비대에게 요격당함','Intercepted by a reserve') },
   res:  { name:tr('예비대','Reserve'), hn:'豫備', plus:tr('전열을 넘어 들어온 적 기병을 요격','Intercepts enemy cavalry that gets past the line'), minus:tr('정면으로 오는 기병은 막지 않고, 40초 뒤에야 접전에 들어감','Does not meet cavalry head-on; joins the melee only after 40 s') },
-  van:  { name:tr('선봉 돌격','Vanguard Charge'), hn:'先鋒', plus:tr('걷는 적에게 강함. 보병 앞줄 곁에서 나아가다 적이 150보 안으로 다가오면 들이치고, 돌격 뒤 30초 동안 충격이 크고 아군 사기가 오름','Strong against marching enemies. It moves beside the infantry front and charges once any enemy comes within 150 paces; for 30 s after the charge its shock is greater and your morale rises'), minus:tr('방어하는 적의 창벽에 막히고, 아군이 방어를 고르면 기병만 홀로 싸움','Stopped by a Defensive spear wall; if your army is Defensive, the cavalry fights alone') },
+  van:  { name:tr('선봉 돌격','Vanguard Charge'), hn:'先鋒', plus:tr('걷는 적에게 강함. 보병 앞줄 곁에서 나아가다 적이 230보 안으로 다가오면 들이치고, 돌격 뒤 30초 동안 충격이 크고 아군 사기가 오름','Strong against marching enemies. It moves beside the infantry front and charges once any enemy comes within 230 paces; for 30 s after the charge its shock is greater and your morale rises'), minus:tr('방어하는 적의 창벽에 막히고, 아군이 방어를 고르면 기병만 홀로 싸움','Stopped by a Defensive spear wall; if your army is Defensive, the cavalry fights alone') },
 };
 
 // 진형 배치: f=자기 진영 끝에서 앞쪽 거리, l=가운데에서 옆으로 떨어진 거리, a=안쪽으로 튼 각도
@@ -3213,7 +3416,7 @@ function planAI(side){
   }
 }
 
-const VAN={gap:150, t:30, shock:1.3, cheer:6};   /* 선봉 돌격: 들이칠 거리(적이 이만큼 다가오면, 병종 상관없이) · 기세 지속(초) · 돌격 사기 충격 배율 · 첫 돌격 때 아군 보병 사기 */
+const VAN={gap:230, t:30, shock:1.3, cheer:6};   /* 선봉 돌격: 들이칠 거리(적이 이만큼 다가오면, 병종 상관없이) · 기세 지속(초) · 돌격 사기 충격 배율 · 첫 돌격 때 아군 보병 사기 */
 const vanWin=u=>!castle && !isLanding() && !isNaval() && u.t==='cav' && plans[u.side].cav==='van' && u.ai.vt!=null && time-u.ai.vt<VAN.t;
 function cavAI(u,P,me,foes,side,dir){
   const A=u.ai, nm=NAME[side], fwd=side?Math.PI:0;
@@ -3225,7 +3428,7 @@ function cavAI(u,P,me,foes,side,dir){
   if(A.fought){ const t=pick(foes,v=>strikeBias(v)-(v.contacts.length?80:0)); if(t){ order(u,'charge',{tgt:t,run:true}); return; } }   /* 한 번 싸운 기병은 맞서던 적이 무너지면 그 자리에서 머뭇거리지 않고 곧바로 가장 가까운(맞붙은) 적에게 돌격 */
   if(A.ph==='strike' || (P.cav==='van')){
     if(time<1) return;
-    if(P.cav==='van' && !A.ph){   /* 선봉 돌격: 보병 앞줄 곁에서 함께 나아가다가(홀로 먼저 뛰어들어 갇히지 않게), 병종 상관없이 적이 아군 선봉 기병 150보 안으로 다가오면 다 함께 들이침 · 60초가 지나거나 접전이 붙으면 그때도 */
+    if(P.cav==='van' && !A.ph){   /* 선봉 돌격: 보병 앞줄 곁에서 함께 나아가다가(홀로 먼저 뛰어들어 갇히지 않게), 병종 상관없이 적이 아군 선봉 기병 230보(VAN.gap) 안으로 다가오면 다 함께 들이침 · 60초가 지나거나 접전이 붙으면 그때도 */
       if(!P.vanGo){ const vc=me.filter(m=>m.t==='cav'); let nd=1e9; for(const c of vc) for(const v of foes) nd=Math.min(nd,dist(c,v));
         if(nd<=VAN.gap || time>=60 || P.engagedAt) P.vanGo=true; }
       if(!P.vanGo){ const mi=me.filter(m=>m.t!=='cav'), fr=mi.length?(dir>0?Math.max(...mi.map(m=>m.x)):Math.min(...mi.map(m=>m.x))):u.home.x, hx=fr+dir*10, go=mi.some(m=>m.st==='move'&&m.mv);
@@ -7375,7 +7578,7 @@ function mount(opts, done, headless){
 }
 const FACTION_LIST=[['joseon','조선','Joseon'],['jin','후금','Later Jin'],['ming','명','Ming'],['yuan','북원','Northern Yuan'],['wa','왜국','Wa'],['militia','민병','Militia']];
 global.DBYGBattle={
-  version:'v41',
+  version:'v42',
   modes:['field','siege','landing','naval'],
   factions:FACTION_LIST.map(([id,name,en])=>({id,name,en})),
   open(opts){ ensureFont(); return new Promise(res=>{ mount(opts||{}, res, false); }); },
