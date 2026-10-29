@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>두뇌 서버 POC</title>
+<style>
+  :root{color-scheme:dark light;--bg:#141F29;--fg:#e8e2d4;--mut:#9aa4ad;--ok:#6fcf97;--bad:#eb5757;--box:#1e2b38;--line:#2d3b48}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Noto Sans KR",sans-serif;padding:16px;max-width:720px;margin-inline:auto}
+  h1{font-size:20px;margin:0 0 4px} .mut{color:var(--mut);font-size:13px}
+  fieldset{border:1px solid var(--line);border-radius:8px;margin:14px 0;padding:10px 12px} legend{padding:0 6px;color:var(--mut)}
+  label{display:inline-block;margin:4px 10px 4px 0} input[type=number]{width:62px} input[type=text]{width:100%;box-sizing:border-box}
+  input,button{font:inherit;background:var(--box);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+  button{cursor:pointer;margin:4px 6px 4px 0}
+  .ok{color:var(--ok)} .bad{color:var(--bad)}
+  pre{background:var(--box);border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto;font-size:12.5px;white-space:pre-wrap}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+</style>
+</head>
+<body>
+<h1>동방열국지 — 두뇌 서버 POC</h1>
+<div class="mut">이 페이지에는 계산식이 없습니다. 전투 결과는 Cloudflare Worker가 계산해 돌려줍니다.<br>
+지금 출처(Origin): <b id="origin"></b></div>
+
+<fieldset><legend>서버 (Worker 설정에서 REQUIRE_AUTH=0 으로 두고 시험)</legend>
+  <input type="text" id="url" placeholder="https://dongbang-brain.〈계정〉.workers.dev">
+  <div class="row"><button id="bPing">① 출처 확인 (/ping)</button><span id="ping" class="mut"></span></div>
+</fieldset>
+
+<fieldset><legend>전투 입력</legend>
+  <div><b>공격</b>
+    <label>기병 <input type="number" id="a_cav" value="5"></label><label>궁병 <input type="number" id="a_arc" value="10"></label>
+    <label>살수 <input type="number" id="a_inf" value="10"></label><label>화포 <input type="number" id="a_cat" value="2"></label></div>
+  <div><b>수비</b>
+    <label>기병 <input type="number" id="d_cav" value="2"></label><label>궁병 <input type="number" id="d_arc" value="12"></label>
+    <label>살수 <input type="number" id="d_inf" value="8"></label><label>화포 <input type="number" id="d_cat" value="0"></label></div>
+  <div><label>성 단계(0~6) <input type="number" id="castle" value="3" min="0" max="6"></label><label>공격 배율 <input type="number" id="atk" value="1" step="0.1"></label><label>합 <input type="number" id="maxR" value="6" min="1" max="20"></label></div>
+  <div class="row"><button id="bFight">② 전투 계산 (/fight) 1회</button><button id="bStat">③ 100회 통계</button><span id="st" class="mut"></span></div>
+</fieldset>
+
+<pre id="out">결과가 여기 나옵니다.</pre>
+
+<script>
+const $=id=>document.getElementById(id);
+$('origin').textContent=location.origin;
+try{ $('url').value=localStorage.getItem('poc-url')||''; }catch(e){}
+$('url').addEventListener('change',()=>{ try{ localStorage.setItem('poc-url',$('url').value.trim()); }catch(e){} });
+const base=()=>$('url').value.trim().replace(/\/+$/,'');
+const show=(o,cls)=>{ $('out').textContent=typeof o==='string'?o:JSON.stringify(o,null,2); $('out').className=cls||''; };
+const n=id=>+$(id).value||0;
+const body=()=>({a0:{cav:n('a_cav'),arc:n('a_arc'),inf:n('a_inf'),nav:0,cat:n('a_cat')},d0:{cav:n('d_cav'),arc:n('d_arc'),inf:n('d_inf'),nav:0,cat:n('d_cat')},o:{castle:n('castle'),atk:+$('atk').value||1},maxR:n('maxR')});
+
+async function callFight(){
+  const r=await fetch(base()+'/fight',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body())});
+  const j=await r.json().catch(()=>null); if(!r.ok) throw new Error('HTTP '+r.status+' '+JSON.stringify(j)); return j;
+}
+$('bPing').onclick=async()=>{ $('ping').textContent='…'; try{ const r=await fetch(base()+'/ping'); const j=await r.json().catch(()=>null);
+  $('ping').innerHTML=r.ok?'<span class="ok">✅ 허용된 출처 — 서버 응답 OK</span>':'<span class="bad">⛔ 거절 HTTP '+r.status+'</span>'; show(j||('HTTP '+r.status)); }
+  catch(e){ $('ping').innerHTML='<span class="bad">⛔ 거절됨 (브라우저가 응답을 막음 = 이 출처는 허용 목록에 없음)</span>'; show(String(e),'bad'); } };
+$('bFight').onclick=async()=>{ try{ const j=await callFight(); show({승패:j.win?'공격 승':'수비 승',합수:j.rounds.length,공격잔여:j.a,수비잔여:j.d,합별:j.rounds},'ok'); }catch(e){ show('⛔ '+e.message,'bad'); } };
+$('bStat').onclick=async()=>{ const N=100; let w=0,ra=0,rd=0,fail=0; $('st').textContent='0/'+N;
+  for(let i=0;i<N;i+=10){ const rs=await Promise.all(Array.from({length:10},()=>callFight().catch(()=>null)));
+    rs.forEach(j=>{ if(!j){fail++;return;} if(j.win) w++; ra+=j.a.cav+j.a.arc+j.a.inf; rd+=j.d.cav+j.d.arc+j.d.inf; }); $('st').textContent=(i+10)+'/'+N; }
+  const ok=N-fail; show({시행:N,실패:fail,공격승률:ok?Math.round(100*w/ok)+'%':'-',평균_공격잔여병력:ok?(ra/ok).toFixed(1):'-',평균_수비잔여병력:ok?(rd/ok).toFixed(1):'-'},fail?'bad':'ok'); };
+</script>
+</body>
+</html>
