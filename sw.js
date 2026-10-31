@@ -1,6 +1,6 @@
 // 동방열국지 service worker: plays offline after the first visit.
 // Bump VERSION whenever index.html changes so phones pick up the new build.
-const VERSION = 'v178';
+const VERSION = 'v179';
 const CACHE = 'dongbang-' + VERSION;
 const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE)).then(() => self.skipWaiting())); });
