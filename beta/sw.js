@@ -2,7 +2,7 @@
 // 동방열국지 service worker: plays offline after the first visit.
 // Bump VERSION whenever index.html changes so phones pick up the new build.
 // v180(D15): 같은 출처에 베타(/fareast/beta/, 캐시 dongbang-beta-*)가 함께 있으므로 라이브 SW는 제 캐시(dongbang-v*)만 지우고 /beta/ 요청에는 손대지 않음.
-const VERSION = 'v185';
+const VERSION = 'v189';
 const PREFIX = 'dongbang-beta-';
 const CACHE = PREFIX + VERSION;
 const MINE = k => k.startsWith('dongbang-beta-');
@@ -15,7 +15,6 @@ self.addEventListener('fetch', e => {
   const req = e.request; if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (SKIP && url.origin === location.origin && SKIP.test(url.pathname)) return;   // 베타 채널 경로는 베타 SW 몫
-  if (url.origin === location.origin && /\/opening\.mp4$/.test(url.pathname)) return;   // v185: 첫 실행 오프닝 영상 — 캐시하지 않고 네트워크로만(범위 요청 그대로)
   if (req.mode === 'navigate' || url.origin === location.origin) {
     // network first for the game itself (so updates arrive), cache as fallback when offline
     e.respondWith(fetch(req).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put(req, copy)); return r; })
