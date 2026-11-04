@@ -2,7 +2,7 @@
 // 동방열국지 service worker: plays offline after the first visit.
 // Bump VERSION whenever index.html changes so phones pick up the new build.
 // v180(D15): 같은 출처에 베타(/fareast/beta/, 캐시 dongbang-beta-*)가 함께 있으므로 라이브 SW는 제 캐시(dongbang-v*)만 지우고 /beta/ 요청에는 손대지 않음.
-const VERSION = 'v197';
+const VERSION = 'v199';
 const PREFIX = 'dongbang-beta-';
 const CACHE = PREFIX + VERSION;
 const MINE = k => k.startsWith('dongbang-beta-');
